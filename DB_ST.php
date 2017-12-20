@@ -7,6 +7,8 @@ require 'dbconn.php';
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//This is great
 class DB_ST {
 
     public static function getAll() {
