@@ -68,10 +68,11 @@ ENGINE = InnoDB;
 -- Table `spletna`.`Artikel`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `spletna`.`Artikel` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `ime` VARCHAR(45) NOT NULL,
   `cena` FLOAT NOT NULL,
   `aktiviran` boolean NOT NULL,
-  PRIMARY KEY (`ime`, `cena`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
