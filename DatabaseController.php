@@ -27,7 +27,7 @@ class DbController {
         $statement = $db->prepare("UPDATE :vloga SET :atribute = :value WHERE email = :email");
         $statement->bindParam(":vloga", $vloga);
         $statement->bindParam(":atribute", $atribute);
-        $statemetn->bindParam(":email", $email);
+        $statement->bindParam(":email", $email);
         $statement->bindParam(":value", $value);
         $statement->execute();
     }
@@ -40,7 +40,7 @@ class DbController {
                 . "(:ime, :priimek, :email, :geslo, 'False')");
         $statement->bindParam(":ime", $ime);
         $statement->bindParam(":priimek", $priimek);
-        $statemtn->bindParam(":email", $email);
+        $statement->bindParam(":email", $email);
         $statement->bindParam(":geslo", $geslo);
         $statement->execute();
         
@@ -72,9 +72,9 @@ class DbController {
                 . "(:ime, :priimek, :email, :geslo, :naslov, :telefon 'False')");
         $statement->bindParam(":ime", $ime);
         $statement->bindParam(":priimek", $priimek);
-        $statemtn->bindParam(":naslov", $naslov);
-        $statemtn->bindParam(":telefon", $telefon);
-        $statemtn->bindParam(":email", $email);
+        $statement->bindParam(":naslov", $naslov);
+        $statement->bindParam(":telefon", $telefon);
+        $statement->bindParam(":email", $email);
         $statement->bindParam(":geslo", $geslo);
         $statement->execute();
         
@@ -88,8 +88,8 @@ class DbController {
         $statement = $db->prepare("UPDATE Artikel SET :atribute = :value WHERE ime = :ime AND cena = :cena");
         $statement->bindParam(":value", $value);
         $statement->bindParam(":atribute", $atribute);
-        $statemtn->bindParam(":ime", $ime);
-         $statemtn->bindParam(":cena", $cena);
+        $statement->bindParam(":ime", $ime);
+        $statement->bindParam(":cena", $cena);
         $statement->execute();
         
     }
