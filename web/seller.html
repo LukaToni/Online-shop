@@ -5,7 +5,7 @@
         <!--<link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">-->
         <!--core first + styles last-->
         <link href="fontawesome-free-5.0.2/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
-        <?php include "login.php2"; ?>
+        <script src="js/script.js"></script>
     </head>
 
     <body>
@@ -32,16 +32,36 @@
                 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  My profile</a>
                     <div class="dropdown-content">
-                        <a href="#edit_profile"><i class="fas fa-pencil-alt"></i>  Edit profile</a>
-                        <a href="#past_buy"><i class="fas fa-sticky-note"></i>  Past buy</a>
-                        <a href="#logout"><i class="fas fa-power-off"></i>  Logout</a>
+                        <a href="#edit_profile" onclick="showOrHideSeller('edit_profile')"><i class="fas fa-pencil-alt"></i>  Edit profile</a>
+                        <a href="/Online-shop/web/index.html"><i class="fas fa-power-off"></i>  Logout</a>
                     </div>
                 </li>
             </ul>
         </div>
 
         <div class="context" id="context">
-
+            <!-- TODO: in_progress, history, create_client, client_list  update js-->
+            <!-- EDIT PROFILE -->
+            <div class="edit_profile" id="edit_profile" align = "center" style="display: none;">
+                <div style = "width:300px; border: solid 1px #333333; margin: 25px; " align = "center">
+                    <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Edit profile</b></div>
+                    <div style = "margin:30px">
+                        <form action = "" method = "post">
+                            <label>Name:</label><br/>
+                            <input type = "text" name = "name" class = "box" value="Curent name"/><br/><br/>
+                            <label>Surname:</label><br/>
+                            <input type = "text" name = "surname" class = "box" value="Curent surname"/><br/><br/>
+                            <label>Address:</label><br/>
+                            <input type = "text" name = "address" class = "box" value="my@gmail.com"/><br/><br/>
+                            <label>Old password:</label><br/>
+                            <input type = "password" name = "password" class = "box" /><br/><br/>
+                            <label>New password:</label><br/>
+                            <input type = "password" name = "new_password" class = "box" /><br/><br/>
+                            <input type = "submit" value = " Submit "/><br/>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="footer" id="footer">

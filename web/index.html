@@ -15,7 +15,7 @@
 
         <div class="navbar" id="navbar">
             <ul>
-                <li><a href="#article"><i class="fas fa-book"></i>  Article</a></li>
+                <li><a href="#article" onclick="showOrHide('article')"><i class="fas fa-book"></i>  Article</a></li>
                 <li><a href="#shopping_cart" onclick="showOrHide('shopping_cart')"><i class="fas fa-shopping-cart"></i>  Shopping cart</a></li>
                 <li><a href="#registration" onclick="showOrHide('registration')"><i class="fas fa-user-plus"></i>  Registration</a></li>
                 <li><a href="#login" onclick="showOrHide('login')"><i class="fas fa-sign-in-alt"> </i>  Login</a></li>
@@ -24,40 +24,66 @@
 
         <div class="context" id="context">
 
-            <div class="login" id="login" align = "center" style="display: none;">
-                <div style = "width:300px; border: solid 1px #333333; margin: 25px; " align = "center">
-                    <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
+            <!-- ARTICLE -->
+            <div class="article" id="article" align = "center" style="display: none; margin-top: 25px">
+                <div style = "border: solid 1px #333333;" align = "center">
+                    <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Article</b></div>
                     <div style = "margin:30px">
-                        <form action = "" method = "post">
-                            <label>User name:</label><br/>
-                            <input type = "text" name = "username" class = "box"/><br/><br/>
-                            <label>Password:</label><br/>
-                            <input type = "password" name = "password" class = "box" /><br/><br/>
-                            <input type = "submit" value = " Submit "/><br/>
-                        </form>
-                        <div style = "font-size:11px; color:#cc0000; margin-top:10px">
-                            <?php echo $error; ?>
-                        </div>
+                        <table style="width:100%">
+                            <tr>
+                                <th>Article</th>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <!--<th>Add</th>-->
+                                <!--<th>Remove</th>-->
+                            </tr>
+                            <!-- Example connect with DB-->
+                            <tr>
+                                <td>Book of magic </td>
+                                <td>Magic book</td>
+                                <td>1</td>
+                                <td>4,99 <i class="fas fa-euro-sign"></i></td>
+                                <td><i class="fas fa-plus"> Add</i></td>
+                                <td><i class="fas fa-trash"></i> Remove</td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <input type = "submit" value = " End shopping "/><br/>
                     </div>
                 </div>
             </div>
 
+            <!-- SHOPPING CART -->
             <div class="shopping_cart" id="shopping_cart" align = "center" style="display: none; margin-top: 25px">
                 <div style = "border: solid 1px #333333;" align = "center">
                     <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Shopping cart</b></div>
                     <div style = "margin:30px">
-                        <form action = "" method = "post">
-                            <label>Name:</label><br/>
-                            <input type = "text" name = "name" class = "box"/><br/><br/>
-                        </form>
-                        <div style = "font-size:11px; color:#cc0000; margin-top:10px">
-                            <?php echo $error; ?>
-                        </div>
+                        <table style="width:100%">
+                            <tr>
+                                <th>Article</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <!--<th>Add</th>-->
+                                <!--<th>Remove</th>-->
+                          </tr>
+                          <!-- Example connect with DB -->
+                            <tr>
+                                <td>Book of magic </td>
+                                <td>1</td>
+                                <td>4,99 <i class="fas fa-euro-sign"></i></td>
+                                <td><i class="fas fa-plus"> Add one</i></td>
+                                <td><i class="fas fa-trash"></i> Remove</td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <input type = "submit" value = " End shopping "/><br/>
                     </div>
                 </div>
             </div>
 
-            <div class="car" id="registration" align = "center" style="display: none;">
+            <!-- REGISTRATION -->
+            <div class="registration" id="registration" align = "center" style="display: none;">
                 <div style = "width:300px; border: solid 1px #333333; margin: 25px; " align = "center">
                     <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Registration</b></div>
                     <div style = "margin:30px">
@@ -79,7 +105,24 @@
                 </div>
             </div>
 
-
+            <!-- LOGIN -->
+            <div class="login" id="login" align = "center" style="display: block;">
+                <div style = "width:300px; border: solid 1px #333333; margin: 25px; " align = "center">
+                    <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
+                    <div style = "margin:30px">
+                        <form action = "" method = "post">
+                            <label>User name:</label><br/>
+                            <input type = "text" name = "username" class = "box"/><br/><br/>
+                            <label>Password:</label><br/>
+                            <input type = "password" name = "password" class = "box" /><br/><br/>
+                            <input type = "submit" value = " Submit "/><br/>
+                        </form>
+                        <div style = "font-size:11px; color:#cc0000; margin-top:10px">
+                            <?php echo $error; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 

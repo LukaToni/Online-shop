@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="css/styles.css" rel="stylesheet" >
+    <!--<link href="https://use.fontawesome.com/releases/v5.0.2/css/all.css" rel="stylesheet">-->
+    <!--core first + styles last-->
+    <link href="fontawesome-free-5.0.2/web-fonts-with-css/css/fontawesome-all.css" rel="stylesheet">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+
+<div class="title" id="title" style="height: 50px; text-align: center"><h1>SELLER</h1></div>
+
+<div class="navbar" id="navbar">
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  Sellers</a>
+            <div class="dropdown-content">
+                <a href="#create_seller"><i class="fas fa-user"></i>  Create seller</a>
+                <a href="#seller_list"><i class="fas fa-history"></i>  Seller list</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  My profile</a>
+            <div class="dropdown-content">
+                <a href="#update_profile" onclick="showOrHideAdmin('update_profile')"><i class="fas fa-pencil-alt"></i>  Update profile</a>
+                <a href="#update_password" onclick="showOrHideAdmin('update_password')"><i class="fas fa-pencil-alt"></i>  Update password</a>
+                <a href="/Online-shop/web/index.html"><i class="fas fa-power-off"></i>  Logout</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="context" id="context">
+    <!-- TODO: create_seller, seller_list, update_profile, update_password  update js-->
+</div>
+
+<div class="footer" id="footer">
+    <footer>
+        <p>Copyright (c) 2017 by EP Team</a></p>
+    </footer>
+</div>
+</body>
+</html>
