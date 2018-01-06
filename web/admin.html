@@ -10,22 +10,21 @@
 
 <body>
 
-<div class="title" id="title" style="height: 50px; text-align: center"><h1>SELLER</h1></div>
+<div class="title" id="title" style="height: 50px; text-align: center"><h1>ADMIN</h1></div>
 
 <div class="navbar" id="navbar">
     <ul>
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  Sellers</a>
             <div class="dropdown-content">
-                <a href="#create_seller"><i class="fas fa-user"></i>  Create seller</a>
-                <a href="#seller_list"><i class="fas fa-history"></i>  Seller list</a>
+                <a href="#create_seller"  onclick="showOrHideAdmin('create_seller')"><i class="fas fa-user"></i>  Create seller</a>
+                <a href="#seller_list" onclick="showOrHideAdmin('seller_list')"><i class="fas fa-history"></i>  Seller list</a>
             </div>
         </li>
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  My profile</a>
             <div class="dropdown-content">
-                <a href="#update_profile" onclick="showOrHideAdmin('update_profile')"><i class="fas fa-pencil-alt"></i>  Update profile</a>
-                <a href="#update_password" onclick="showOrHideAdmin('update_password')"><i class="fas fa-pencil-alt"></i>  Update password</a>
+                <a href="#edit_profile" onclick="showOrHideAdmin('edit_profile')"><i class="fas fa-pencil-alt"></i>  Edit profile</a>
                 <a href="/Online-shop/web/index.html"><i class="fas fa-power-off"></i>  Logout</a>
             </div>
         </li>
@@ -33,7 +32,97 @@
 </div>
 
 <div class="context" id="context">
-    <!-- TODO: create_seller, seller_list, update_profile, update_password  update js-->
+
+    <!-- CREATE SELLER -->
+    <div class="create_seller" id="create_seller" align = "center" style="display: none;">
+        <div style = "width:300px; border: solid 1px #333333; margin: 25px; " align = "center">
+            <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Create seller</b></div>
+            <div style = "margin:30px">
+                <form action = "" method = "post">
+                    <label>Seller name:</label><br/>
+                    <input type = "text" name = "name" class = "box" value="Curent name"/><br/><br/>
+                    <label>Seller surname:</label><br/>
+                    <input type = "text" name = "surname" class = "box" value="Curent surname"/><br/><br/>
+                    <label>Seller address:</label><br/>
+                    <input type = "password" name = "password" class = "box" /><br/><br/>
+                    <label>Seller password:</label><br/>
+                    <input type = "password" name = "new_password" class = "box" /><br/><br/>
+                    <input type = "submit" value = " Create seller "/><br/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SELLER LIST -->
+    <div class="seller_list" id="seller_list" align = "center" style="display: none;">
+        <div style = "width:500px; border: solid 1px #333333; margin: 25px; " align = "center">
+            <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Seller list</b></div>
+            <div style = "margin:30px">
+                <!-- show all sellers -->
+                <form action = "" method = "post">
+                    <div class="row">
+                        <div class="column">
+                            <label>Seller name:</label><br/>
+                            <input type = "text" name = "name" class = "box" value="Seller 1"/><br/><br/>
+                            <label>Seller surname:</label><br/>
+                            <input type = "text" name = "surname" class = "box" value="Seller 1"/><br/><br/>
+                            <label>Seller address:</label><br/>
+                            <input type = "password" name = "password" class = "box" /><br/><br/>
+                            <label>Seller password:</label><br/>
+                            <input type = "password" name = "new_password" class = "box" /><br/><br/>
+                        </div>
+                        <div class="column" style="margin-top: 70px;">
+                            <input type = "submit" id="activate"    value = " Activate "    style="display: block; width: 100px;"/><br/>
+                            <input type = "submit" id="deactivate"  value = " Deactivate "  style="display: block; width: 100px;"/><br/>
+                            <input type = "submit" id="update"      value = " Update "      style="display: block; width: 100px;"/><br/>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <form action = "" method = "post">
+                    <div class="row">
+                        <div class="column">
+                            <label>Seller name:</label><br/>
+                            <input type = "text" name = "name" class = "box" value="Seller 2"/><br/><br/>
+                            <label>Seller surname:</label><br/>
+                            <input type = "text" name = "surname" class = "box" value="Seller 2"/><br/><br/>
+                            <label>Seller address:</label><br/>
+                            <input type = "password" name = "password" class = "box" /><br/><br/>
+                            <label>Seller password:</label><br/>
+                            <input type = "password" name = "new_password" class = "box" /><br/><br/>
+                        </div>
+                        <div class="column" style=" margin-top: 70px;">
+                            <input type = "submit" id="activate"    value = " Activate "    style="display: block; width: 100px;"/><br/>
+                            <input type = "submit" id="deactivate"  value = " Deactivate "  style="display: block; width: 100px;"/><br/>
+                            <input type = "submit" id="update"      value = " Update "      style="display: block; width: 100px;"/><br/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT PROFILE -->
+    <div class="edit_profile" id="edit_profile" align = "center" style="display: none;">
+        <div style = "width:300px; border: solid 1px #333333; margin: 25px; " align = "center">
+            <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Edit profile</b></div>
+            <div style = "margin:30px">
+                <form action = "" method = "post">
+                    <label>Name:</label><br/>
+                    <input type = "text" name = "name" class = "box" value="Curent name"/><br/><br/>
+                    <label>Surname:</label><br/>
+                    <input type = "text" name = "surname" class = "box" value="Curent surname"/><br/><br/>
+                    <label>Address:</label><br/>
+                    <input type = "text" name = "address" class = "box" value="my@gmail.com"/><br/><br/>
+                    <label>Old password:</label><br/>
+                    <input type = "password" name = "password" class = "box" /><br/><br/>
+                    <label>New password:</label><br/>
+                    <input type = "password" name = "new_password" class = "box" /><br/><br/>
+                    <input type = "submit" value = " Submit "/><br/>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="footer" id="footer">

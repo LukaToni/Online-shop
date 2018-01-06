@@ -56,12 +56,48 @@ function showOrHideSeller( idOfDiv ) {
     console.log("Show: " + idOfDiv);
     var x = document.getElementById( idOfDiv );
 
-    if ( idOfDiv === "edit_profile" ) {
+    if ( idOfDiv === "article" ) {
         x.style.display = "block";
-        document.getElementById("past_buy").style.display = "none";
-    } else if ( idOfDiv === "past_buy" ) {
-        x.style.display = "block";
+        document.getElementById("in_progress").style.display = "none";
+        document.getElementById("history").style.display = "none";
+        document.getElementById("create_client").style.display = "none";
+        document.getElementById("client_list").style.display = "none";
         document.getElementById("edit_profile").style.display = "none";
+    } else if ( idOfDiv === "in_progress" ) {
+        x.style.display = "block";
+        document.getElementById("article").style.display = "none";
+        document.getElementById("history").style.display = "none";
+        document.getElementById("create_client").style.display = "none";
+        document.getElementById("client_list").style.display = "none";
+        document.getElementById("edit_profile").style.display = "none";
+    } else if ( idOfDiv === "history" ) {
+        x.style.display = "block";
+        document.getElementById("in_progress").style.display = "none";
+        document.getElementById("article").style.display = "none";
+        document.getElementById("create_client").style.display = "none";
+        document.getElementById("client_list").style.display = "none";
+        document.getElementById("edit_profile").style.display = "none";
+    } else if ( idOfDiv === "create_client" ) {
+        x.style.display = "block";
+        document.getElementById("in_progress").style.display = "none";
+        document.getElementById("history").style.display = "none";
+        document.getElementById("article").style.display = "none";
+        document.getElementById("client_list").style.display = "none";
+        document.getElementById("edit_profile").style.display = "none";
+    } else if ( idOfDiv === "client_list" ) {
+        x.style.display = "block";
+        document.getElementById("in_progress").style.display = "none";
+        document.getElementById("history").style.display = "none";
+        document.getElementById("create_client").style.display = "none";
+        document.getElementById("article").style.display = "none";
+        document.getElementById("edit_profile").style.display = "none";
+    } else if ( idOfDiv === "edit_profile" ) {
+        x.style.display = "block";
+        document.getElementById("in_progress").style.display = "none";
+        document.getElementById("history").style.display = "none";
+        document.getElementById("create_client").style.display = "none";
+        document.getElementById("client_list").style.display = "none";
+        document.getElementById("article").style.display = "none";
     }
 }
 
@@ -69,11 +105,27 @@ function showOrHideAdmin( idOfDiv ) {
     console.log("Show: " + idOfDiv);
     var x = document.getElementById( idOfDiv );
 
-    if ( idOfDiv === "update_profile" ) {
+    if ( idOfDiv === "create_seller" ) {
         x.style.display = "block";
-        document.getElementById("update_password").style.display = "none";
-    } else if ( idOfDiv === "update_password" ) {
+        document.getElementById("seller_list").style.display = "none";
+        document.getElementById("edit_profile").style.display = "none";
+    } else if ( idOfDiv === "seller_list" ) {
         x.style.display = "block";
-        document.getElementById("update_profile").style.display = "none";
+        document.getElementById("create_seller").style.display = "none";
+        document.getElementById("edit_profile").style.display = "none";
+    } else if ( idOfDiv === "edit_profile" ) {
+        x.style.display = "block";
+        document.getElementById("create_seller").style.display = "none";
+        document.getElementById("seller_list").style.display = "none";
     }
+}
+
+
+function printDiv(divName) {
+
+    var printContents = document.getElementById(divName).innerHTML;
+    w=window.open();
+    w.document.write(printContents);
+    w.print();
+    w.close();
 }
