@@ -1,23 +1,18 @@
 <?php
 session_start();
 
-if(isset($_POST['seller_submitted'])){
-    include 'database/DB_Engine.php';
-    $values = "(2,NULL,'".$_POST['first']."','".$_POST['last']."',NULL,NULL,NULL,NULL,NULL,'".$_POST['email']."','".$_POST['password']."')";
-    $rez = executeQuery("INSERT INTO users (role_id,id, first_name, last_name, street_address"
-            . ",city,postal_code,country,phone_number,email,password) "
-            . "VALUES ".$values);
-    
-    if($rez == 1){
-        $_SESSION['register_success'] = true;
-    }
-}
-
+include 'database/DB_Engine.php';
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    
-    
-}
+    if(isset($_POST['activate'])){
+        executeQuery("UPDATE articles SET active = 1 WHERE id = ".$_POST['article_id']);
+    }else if(isset($_POST['deactivate'])){
+        executeQuery("UPDATE articles SET active = 0 WHERE id = ".$_POST['article_id']);
+    }else if(isset($_POST['update'])){
+        executeQuery("UPDATE articles SET name = '".$_POST['name']."', "
+            . "price = '".$_POST['price']."', description = '".$_POST['desc']."' WHERE id = ".$_POST['article_id']);
         
+    }
+}      
         
 ?>
 <html>
@@ -33,20 +28,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     <!-- SELLER LIST -->
     <div class="article_list" id="article_list" align = "center">
         <div style = "width:500px; border: solid 1px #333333; margin: 25px; " align = "center">
-            <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Seller list</b></div>
+            <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Article list</b></div>
             <div style = "margin:30px">
                 <!-- show all articles -->
                 <?php
-                       include 'database/DB_Engine.php';
-                       $rez = fetchRows("SELECT id, name, price, description FROM articles");
+                       
+                       $rez = fetchRows("SELECT id, name, price, description, active FROM articles");
                 ?>
                 
                 <?php foreach($rez as $row){ ?>
                 <form action = "" method = "post">
                     <div class="row">
                         <div class="column">
-                            <label>Article ID: <?php echo $row['id']; ?></label><br/><br/>
+                            <label>Article ID: <?php echo $row['id']; ?></label><br/>
                             <input type="hidden" name="article_id" value="<?php echo $row['id']; ?>">
+                            <label>Status: 
+                                    <?php if($row['active']){
+                                        echo "Activated";
+                                    }else{
+                                        echo "Deactivated";
+                                    } ?>
+                                <br/></label>
                             <label>Name:</label><br/>
                             <input type = "text" name = "name" class = "box" value="<?php echo $row['name'] ?>"/><br/><br/>
                             <label>Price:</label><br/>

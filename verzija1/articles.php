@@ -1,18 +1,8 @@
 <?php
 session_start();
-include 'database/DB_Engine.php';
-if(isset($_POST['seller_submitted'])){
-    include 'database/DB_Engine.php';
-    $values = "(2,NULL,'".$_POST['first']."','".$_POST['last']."',NULL,NULL,NULL,NULL,NULL,'".$_POST['email']."','".$_POST['password']."')";
-    $rez = executeQuery("INSERT INTO users (role_id,id, first_name, last_name, street_address"
-            . ",city,postal_code,country,phone_number,email,password) "
-            . "VALUES ".$values);
-    
-    if($rez == 1){
-        $_SESSION['register_success'] = true;
-    }
-}
 
+
+include 'database/DB_Engine.php';
 $article_added = false;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo $_POST['article_id'];
@@ -57,10 +47,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <!-- show all articles -->
                 <?php
                        
-                       $rez = fetchRows("SELECT id, name, price, description FROM articles");
+                       $rez = fetchRows("SELECT id, name, price, description, active FROM articles");
                 ?>
                 
-                <?php foreach($rez as $row){ ?>
+                <?php foreach($rez as $row){ 
+                         if($row['active'] == 0){
+                             continue;
+                         }
+                    ?>
                 <?php  if(isset($_SESSION['role_id']) && $_SESSION['role_id'] >= 3) { ?>
                 
                     <tr>

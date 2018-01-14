@@ -13,6 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         executeQuery("UPDATE users SET street_address = '".$_POST['address']."', "
             . "country = '".$_POST['country']."', postal_code = '".$_POST['postal_code']."', "
                 . "phone_number = '".$_POST['phone_number']."' WHERE id = ".$_POST['client_id']);
+        executeQuery("UPDATE users SET city ='".$_POST['city']."' WHERE id = ".$_POST['client_id']);
         if(strlen($_POST['new_password']) > 0){
              executeQuery("UPDATE users SET password = '".$_POST['new_password']."' WHERE id = ".$_POST['client_id']);
         }
@@ -54,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                     }else{
                                         echo "Deactivated";
                                     } ?>
-                                        <br/>
+                                        <br/></label>
                                     <label>First name:</label><br/>
                                     <input type = "text" name = "first" class = "box" value="<?php echo $row['first_name'] ?>"/><br/><br/>
                                     <label>Last name:</label><br/>
