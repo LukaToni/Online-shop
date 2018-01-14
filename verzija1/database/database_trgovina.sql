@@ -52,7 +52,7 @@ CREATE TABLE `articles` (
   `description` varchar(220) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `active` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `articles` (
 
 LOCK TABLES `articles` WRITE;
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` VALUES (1,'aa',10,'aa',NULL),(2,'ii',20,'ii',NULL),(3,'ll',22,'ll',NULL);
+INSERT INTO `articles` VALUES (1,'bb',100,'aa',1),(2,'ii',20,'ii',0),(3,'ll',22,'ll',0),(4,'Trousers',20,'Blue trousers for adults',1);
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `article_id` int(11) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
-  `confirmed` tinyint(4) DEFAULT '0',
+  `state` varchar(20) COLLATE utf8_slovenian_ci DEFAULT 'pending',
   PRIMARY KEY (`order_id`,`user_id`,`article_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -112,7 +112,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('09d56775840c1ae3c079f54faf1c3d4f',13,1,2,1),('09d56775840c1ae3c079f54faf1c3d4f',13,2,1,1),('09d56775840c1ae3c079f54faf1c3d4f',13,3,1,1),('c824f4422847db9cc9a4c69af4f9c939',13,1,2,1),('c824f4422847db9cc9a4c69af4f9c939',13,2,1,1),('c824f4422847db9cc9a4c69af4f9c939',13,3,1,1),('7e2f313c916ca5a62813bec1d3c15289',13,1,1,0),('7e2f313c916ca5a62813bec1d3c15289',13,2,1,0);
+INSERT INTO `orders` VALUES ('b37b5f0d66909d3cc26ac3dfa1787cb8',13,1,2,'confirmed');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,6 +181,7 @@ CREATE TABLE `users` (
   `email` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `password` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `role_id` int(11) DEFAULT '1',
+  `active` varchar(45) COLLATE utf8_slovenian_ci DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -191,7 +192,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'HELL','HELL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,4),(2,'Janez','Novak','googla 3','google','1000','Gugl','440404040','janez@email.com','password',4),(3,'sdf','jhghjgj','jhgkj','jhgkjghg','jhgkjgkj','ghjgkhgjkg','jhgkjgjkg','jhgjkgkjg','hjgkjgjkg',4),(4,'dfgdsfg','hgfhjf','hghgfhg','hgfhgf','jhfhgfghfhj','gfhjghjg','gfhgfjfj','fhgfjgfjhf','hjgfjgh',4),(5,'asdf','asdf','asdf','asdf','asfd','asfd','afds','asdf','asdf',4),(6,'oioiuoiuo','oiuoupi','uopuiu','oiupoiupo','oipuopiuop','oiupiupoiu','oipuopiupo','admin','admin',1),(7,'','','','','','','','','',4),(8,'oiuipopouuoui','gfhg','h','ghfhj','fhgfh','fhgfhgf','hgfhj','aha','aha',4),(9,'anka','anka',NULL,NULL,NULL,NULL,NULL,'anka','anka',1),(10,'anka','anka',NULL,NULL,NULL,NULL,NULL,'anka','anka',2),(11,'da','dsa',NULL,NULL,NULL,NULL,NULL,'da','da',2),(12,'ja','ja',NULL,NULL,NULL,NULL,NULL,'ja','ja',2),(13,'qq','qq','qq','qq','qq','qq','qq','qq','qq',3),(14,'ff','ff','ff','ff','ff','ff','ff','ff','ff',3);
+INSERT INTO `users` VALUES (1,'HELL','HELL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,4,'1'),(2,'Janez','Novak','googla 3','google','1000','Gugl','440404040','janez@email.com','password',4,'1'),(3,'sdf','jhghjgj','jhgkj','jhgkjghg','jhgkjgkj','ghjgkhgjkg','jhgkjgjkg','jhgjkgkjg','hjgkjgjkg',4,'1'),(4,'dfgdsfg','hgfhjf','hghgfhg','hgfhgf','jhfhgfghfhj','gfhjghjg','gfhgfjfj','fhgfjgfjhf','hjgfjgh',4,'1'),(5,'asdf','asdf','asdf','asdf','asfd','asfd','afds','asdf','asdf',4,'1'),(6,'Elon','Musk','','','','','','admin@admin.si','admin',1,'1'),(7,'','','','','','','','','',4,'1'),(8,'oiuipopouuoui','gfhg','h','ghfhj','fhgfh','fhgfhgf','hgfhj','aha','aha',4,'1'),(10,'Anka','Drobec',NULL,NULL,NULL,NULL,NULL,'anka@anka.si','anka',2,'1'),(11,'dada','ega',NULL,NULL,NULL,NULL,NULL,'da@da.si','dada',2,'1'),(12,'ja','ja',NULL,NULL,NULL,NULL,NULL,'ja','ja',2,'1'),(13,'Miha','Tanko','Zalozniška 20','Ljubljana','1000','Slovenija','031 553 396','miha@miha.si','miha',3,'1'),(14,'ff','ff','ff','ff','ff','ff','ff','ff','ff',3,'1');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -204,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-13 19:19:53
+-- Dump completed on 2018-01-14 22:04:08
