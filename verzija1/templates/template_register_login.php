@@ -23,8 +23,8 @@
 <li class="dropdown">
                     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  Orders</a>
                     <div class="dropdown-content">
-                        <a href="orders_in_progress" onclick="showOrHideSeller('in_progress')"><i class="fas fa-wrench"></i>  In progress</a>
-                        <a href="orders_history" onclick="showOrHideSeller('history')"><i class="fas fa-history"></i>  History</a>
+                        <a href="orders" onclick="showOrHideSeller('in_progress')"><i class="fas fa-wrench"></i>  In progress</a>
+                        <a href="orders?history" onclick="showOrHideSeller('history')"><i class="fas fa-history"></i>  History</a>
                     </div>
                 </li>
 <?php } ?>
@@ -32,6 +32,9 @@
 <li class="dropdown">
     <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  My profile</a>
     <div class="dropdown-content">
+        <?php if($_SESSION['role_id'] == 3){
+            echo "<a href=\"orders\"><i class=\"fas fa-list-ol\"></i>  My orders</a>";
+        } ?>
         <a href="edit_profile"><i class="fas fa-pencil-alt"></i>  Edit profile</a>
         <a href="logout.php"><i class="fas fa-power-off"></i>  Logout</a>
     </div>

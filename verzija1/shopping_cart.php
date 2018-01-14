@@ -1,21 +1,12 @@
 <?php
 session_start();
 include 'database/DB_Engine.php';
-if(isset($_POST['seller_submitted'])){
-    include 'database/DB_Engine.php';
-    $values = "(2,NULL,'".$_POST['first']."','".$_POST['last']."',NULL,NULL,NULL,NULL,NULL,'".$_POST['email']."','".$_POST['password']."')";
-    $rez = executeQuery("INSERT INTO users (role_id,id, first_name, last_name, street_address"
-            . ",city,postal_code,country,phone_number,email,password) "
-            . "VALUES ".$values);
-    
-    if($rez == 1){
-        $_SESSION['register_success'] = true;
-    }
-}
 
 $article_added = false;
 $orderID = null;
+$state = "showcart";
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    
     
     if(isset($_POST['remove'])){
         echo $_POST['article_id'];
@@ -25,17 +16,31 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $_SESSION['register_success'] = true;
             $article_added = true;
         }
-    }else if(isset($_POST['end_shopping'])){
+    }else if(isset($_POST['place_order'])){
         $rez = fetchRows("SELECT user_id, article_id, price, name, count(article_id) as quantity FROM shopping_cart as sc, "
                                . "articles as a WHERE article_id = a.id and user_id = ".$_SESSION['user_id']." GROUP BY article_id ORDER BY article_id");
         
         $orderID = md5(rand()+time());
         
         foreach ($rez as $row) {
-            $values = "('".$orderID."',".$_SESSION['user_id'].",".$row['article_id'].",".$row['quantity'].", NULL)";
+            $values = "('".$orderID."',".$_SESSION['user_id'].",".$row['article_id'].",".$row['quantity'].", 'pending')";
             executeQuery("INSERT INTO orders VALUES ".$values);
         } 
         
+    }else if(isset($_POST['end_shopping'])){
+        $state = "confirm";
+    }else if(isset($_POST['confirm'])){
+        $state = "confirmed";
+        $rez = fetchRows("SELECT user_id, article_id, price, name, count(article_id) as quantity FROM shopping_cart as sc, "
+                               . "articles as a WHERE article_id = a.id and user_id = ".$_SESSION['user_id']." GROUP BY article_id ORDER BY article_id");
+        
+        $orderID = md5(rand()+time());
+        
+        foreach ($rez as $row) {
+            $values = "('".$orderID."',".$_SESSION['user_id'].",".$row['article_id'].",".$row['quantity'].", 'pending')";
+            executeQuery("INSERT INTO orders VALUES ".$values);
+        } 
+    }else if(isset($_POST['clearcart'])){
         executeQuery("DELETE FROM shopping_cart WHERE user_id = ".$_SESSION['user_id']);
     }
     
@@ -55,6 +60,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <div class="context" id="context">
 
 
+    <?php if($state == "showcart"){ ?>
     <!-- ARTICLE LIST -->
     <div class="article" id="article" align = "center" style="margin-top: 25px">
         
@@ -106,6 +112,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <br/>
                         <form method="post" action="" name="end_shopping">
                         <input type = "submit" name="end_shopping" value = " End shopping "/><br/>
+                        <input type = "submit" name="clearcart" value = " Clear shopping cart "/><br/>
                         </form>
                         <?php 
                         if($orderID != null){
@@ -114,6 +121,30 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
         </div>
     </div>
+    <?php }else if($state == "confirm") { 
+        #confirm order
+        $rez = fetchRows("SELECT user_id, article_id, price, name, count(article_id) as quantity FROM shopping_cart as sc, "
+                               . "articles as a WHERE article_id = a.id and user_id = ".$_SESSION['user_id']." GROUP BY article_id ORDER BY article_id");
+        $total = 0;
+        foreach($rez as $row){
+            $total += $row['price']*$row['quantity'];
+            echo "<p>".$row['name']." ".$row['quantity']."x ".
+                    $row['price']*$row['quantity']."€</p>";
+        }
+        echo "<p>Total: ".$total."€</p>";
+        ?>
+        
+    <form method="post" action="" name="end_shopping">
+                        <input type = "submit" name="confirm" value = " Confirm "/><br/>
+                        <input type = "submit" name="cancel" value = " Cancel "/><br/>
+                        </form>
+    <?php }else if($state == "confirmed"){ 
+        if($orderID != null){
+                        echo "Order #".$orderID." placed.";
+        }
+        
+    }
+?>
 
     
 </div>

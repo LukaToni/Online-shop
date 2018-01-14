@@ -3,17 +3,6 @@ session_start();
 
 include 'database/DB_Engine.php';
 
-if(isset($_POST['seller_submitted'])){
-    $values = "(2,NULL,'".$_POST['first']."','".$_POST['last']."',NULL,NULL,NULL,NULL,NULL,'".$_POST['email']."','".$_POST['password']."')";
-    $rez = executeQuery("INSERT INTO users (role_id,id, first_name, last_name, street_address"
-            . ",city,postal_code,country,phone_number,email,password) "
-            . "VALUES ".$values);
-    
-    if($rez == 1){
-        $_SESSION['register_success'] = true;
-    }
-}
-
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($_POST['activate'])){
         executeQuery("UPDATE users SET active = 1 WHERE id = ".$_POST['seller_id']);
