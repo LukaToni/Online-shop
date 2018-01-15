@@ -61,7 +61,7 @@ CREATE TABLE `articles` (
 
 LOCK TABLES `articles` WRITE;
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` VALUES (1,'bb',100,'aa',1),(2,'ii',20,'ii',0),(3,'ll',22,'ll',0),(4,'Trousers',20,'Blue trousers for adults',1),(5,'Shirt',4,'small red shirt',1);
+INSERT INTO `articles` VALUES (4,'Trousers',20,'Blue trousers for adults',1),(5,'Shirt',4,'small red shirt',1);
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,7 +241,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'HELL','HELL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,4,'1'),(2,'Janez','Novak','googla 3','google','1000','Gugl','440404040','janez@email.com','password',4,'1'),(3,'sdf','jhghjgj','jhgkj','jhgkjghg','jhgkjgkj','ghjgkhgjkg','jhgkjgjkg','jhgjkgkjg','hjgkjgjkg',4,'1'),(4,'dfgdsfg','hgfhjf','hghgfhg','hgfhgf','jhfhgfghfhj','gfhjghjg','gfhgfjfj','fhgfjgfjhf','hjgfjgh',4,'1'),(5,'asdf','asdf','asdf','asdf','asfd','asfd','afds','asdf','asdf',4,'1'),(6,'Elon','Musk','','','','','','admin@admin.si','admin',1,'1'),(7,'','','','','','','','','',4,'1'),(8,'oiuipopouuoui','gfhg','h','ghfhj','fhgfh','fhgfhgf','hgfhj','aha','aha',4,'1'),(10,'Anka','Drobec',NULL,NULL,NULL,NULL,NULL,'anka@anka.si','anka',2,'1'),(11,'dada','ega',NULL,NULL,NULL,NULL,NULL,'da@da.si','dada',2,'1'),(12,'ja','ja',NULL,NULL,NULL,NULL,NULL,'ja','ja',2,'1'),(13,'Miha','Tanko','Zalozniška 20','Ljubljana','1000','Slovenija','031 553 396','miha@miha.si','miha',3,'1'),(14,'Sanja','Oreh','Slovenska 3','Ljubljana','1000','Slovenija','031 349 825','sanja@sanja.si','sanja',3,'1');
+INSERT INTO `users` VALUES (6,'Elon','Musk','','','','','','admin@admin.si','admin',1,'1'),(10,'Anka','Drobec',NULL,NULL,NULL,NULL,NULL,'anka@anka.si','anka',2,'1'),(13,'Miha','Tanko','Zalozniška 20','Ljubljana','1000','Slovenija','031 553 396','miha@miha.si','miha',3,'1'),(14,'Sanja','Oreh','Slovenska 3','Ljubljana','1000','Slovenija','031 349 825','sanja@sanja.si','sanja',3,'1');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -254,4 +254,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-15  1:30:07
+-- Dump completed on 2018-01-15  1:41:22
