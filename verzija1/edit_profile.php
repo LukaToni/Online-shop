@@ -13,8 +13,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $_SESSION['email'] = $_POST['email'];
     }
     
-    if(strlen($_POST['old_password']) > 0 && countResults("SELECT id FROM users WHERE password = '".$_POST['old_password']."'")){
-        executeQuery("UPDATE users SET password = '".$_POST['new_password']."' WHERE id = ".$_SESSION['user_id']);
+    if(strlen($_POST['old_password']) > 0){
+        $hash = hash('sha256', $_POST['old_password']+"greensalt");
+        if(countResults("SELECT id FROM users WHERE password = '".$hash."' and id = ".$_SESSION['user_id'])){
+        $hash = hash('sha256', $_POST['new_password']+"greensalt");
+        executeQuery("UPDATE users SET password = '".$hash."' WHERE id = ".$_SESSION['user_id']);
+        }
     }
 }
 
