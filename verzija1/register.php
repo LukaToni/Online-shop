@@ -4,10 +4,8 @@ unset($_SESSION['register_success']);
 
 if(isset($_POST['registration_submitted'])){
     include 'database/DB_Engine.php';
-    $values = "(NULL,'".$_POST['first']."','".$_POST['last']."','".$_POST['address']."','".$_POST['city']."','"
-            .$_POST['postal_code']."','".$_POST['country']."','".$_POST['phone_number']."','".$_POST['email']."','".$_POST['password']."')";
-    $rez = executeQuery("INSERT INTO users (id, first_name, last_name, street_address"
-            . ",city,postal_code,country,phone_number,email,password) "
+    $values = "(NULL,'".$_POST['email']."','".$_POST['password']."', 4)";
+    $rez = executeQuery("INSERT INTO users (id, email, password, role_id) "
             . "VALUES ".$values);
     
     if($rez == 1){
@@ -34,20 +32,6 @@ if(isset($_POST['registration_submitted'])){
                     <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Registration</b></div>
                     <div style = "margin:30px">
                         <form action = "" method = "post">
-                            <label>First:</label><br/>
-                            <input type = "text" name = "first" class = "box"/><br/><br/>
-                            <label>Last:</label><br/>
-                            <input type = "text" name = "last" class = "box" /><br/><br/>
-                            <label>Street address:</label><br/>
-                            <input type = "text" name = "address" class = "box"/><br/><br/>
-                            <label>City:</label><br/>
-                            <input type = "text" name = "city" class = "box"/><br/><br/>
-                            <label>Postal code:</label><br/>
-                            <input type = "text" name = "postal_code" class = "box"/><br/><br/>
-                            <label>Country:</label><br/>
-                            <input type = "text" name = "country" class = "box"/><br/><br/>
-                            <label>Phone number:</label><br/>
-                            <input type = "text" name = "phone_number" class = "box"/><br/><br/>
                             <label>Email:</label><br/>
                             <input type = "text" name = "email" class = "box"/><br/><br/>
                             <label>Password:</label><br/>

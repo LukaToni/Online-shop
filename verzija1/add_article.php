@@ -32,7 +32,7 @@ if(isset($_POST['submitted'])){
             <div style = "margin:30px">
                 <form action = "" method = "post">
                     <label>Picture: (NotImplemented)</label><br/>
-                    <input type = "text" name = "pic" class = "box" /><br/><br/>
+                    <input type="file" name="image[]" multiple="true" class = "box" /><br/><br/>
                     <label>Name:</label><br/>
                     <input type = "text" name = "name" class = "box" /><br/><br/>
                     <label>Price:</label><br/>
