@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 unset($_SESSION['register_success']);
 
 if(isset($_POST['registration_submitted'])){

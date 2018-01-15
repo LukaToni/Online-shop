@@ -1,5 +1,8 @@
 <?php 
 session_start();
+if(!isset($_SESSION['logged_in']) || $_SESSION['role_id'] != 2){
+    header('Location: index');
+}
 
 include 'database/DB_Engine.php';
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
