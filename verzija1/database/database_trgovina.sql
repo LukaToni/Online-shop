@@ -16,29 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `anonimniodjemalec`
---
-
-DROP TABLE IF EXISTS `anonimniodjemalec`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `anonimniodjemalec` (
-  `ip` varchar(45) NOT NULL,
-  `cas_dostopa` datetime NOT NULL,
-  PRIMARY KEY (`ip`,`cas_dostopa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `anonimniodjemalec`
---
-
-LOCK TABLES `anonimniodjemalec` WRITE;
-/*!40000 ALTER TABLE `anonimniodjemalec` DISABLE KEYS */;
-/*!40000 ALTER TABLE `anonimniodjemalec` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `articles`
 --
 
@@ -112,30 +89,6 @@ LOCK TABLES `articles_rating` WRITE;
 /*!40000 ALTER TABLE `articles_rating` DISABLE KEYS */;
 INSERT INTO `articles_rating` VALUES (1,13,5),(1,14,4),(4,13,1),(4,14,3);
 /*!40000 ALTER TABLE `articles_rating` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `dnevnik`
---
-
-DROP TABLE IF EXISTS `dnevnik`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `dnevnik` (
-  `vloga` varchar(45) NOT NULL,
-  `datum` datetime NOT NULL,
-  `akcija` varchar(45) NOT NULL,
-  PRIMARY KEY (`vloga`,`datum`,`akcija`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `dnevnik`
---
-
-LOCK TABLES `dnevnik` WRITE;
-/*!40000 ALTER TABLE `dnevnik` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dnevnik` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -254,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-15  1:41:22
+-- Dump completed on 2018-01-15  1:56:53
