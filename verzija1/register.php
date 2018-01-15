@@ -5,7 +5,7 @@ unset($_SESSION['register_success']);
 
 if(isset($_POST['registration_submitted'])){
     include 'database/DB_Engine.php';
-    $hash = hash('sha256', $_POST['password']+"greensalt");
+    $hash = hash('sha256', $_POST['password']."greensalt");
     $values = "(NULL,'".$_POST['email']."','".$hash."', 4)";
     $rez = executeQuery("INSERT INTO users (id, email, password, role_id) "
             . "VALUES ".$values);

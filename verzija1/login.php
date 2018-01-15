@@ -7,7 +7,7 @@ if(isset($_SESSION['logged_in'])){
 
 if(isset($_POST['login_submitted'])){
     include 'database/DB_Engine.php';
-    $hash = hash('sha256', $_POST['password']+"greensalt");
+    $hash = hash('sha256', $_POST['password']."greensalt");
     $values = "WHERE email='".$_POST['email']."' and password='".$hash."'";
     $rez = countResults("SELECT COUNT(*) FROM users ".$values);
     if($rez == 1){

@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             . "last_name = '".$_POST['last']."', email = '".$_POST['email']."' WHERE id = ".$_POST['seller_id']);
         
         if(strlen($_POST['new_password']) > 0){
-            $hash = hash('sha256', $_POST['new_password']+"greensalt");
+            $hash = hash('sha256', $_POST['new_password']."greensalt");
              executeQuery("UPDATE users SET password = '".$hash."' WHERE id = ".$_POST['seller_id']);
         }
     }

@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 . "phone_number = '".$_POST['phone_number']."' WHERE id = ".$_POST['client_id']);
         executeQuery("UPDATE users SET city ='".$_POST['city']."' WHERE id = ".$_POST['client_id']);
         if(strlen($_POST['new_password']) > 0){
-                $hash = hash('sha256', $_POST['new_password']+"greensalt");
+                $hash = hash('sha256', $_POST['new_password']."greensalt");
              executeQuery("UPDATE users SET password = '".$hash."' WHERE id = ".$_POST['client_id']);
         }
     }
