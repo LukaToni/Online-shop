@@ -36,8 +36,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 
                 <?php 
                 
-                if ($_SESSION['role_id'] != 3){
-                $rez = fetchRows("SELECT order_id FROM orders WHERE state = 'pending'");
+                if ($_SESSION['role_id'] == 2){
+                $rez = fetchRows("SELECT distinct(order_id) FROM orders WHERE state = 'pending'");
                 
                 foreach($rez as $row){ ?>
                 <form method="post" action ="">
