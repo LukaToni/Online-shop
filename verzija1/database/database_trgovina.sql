@@ -181,7 +181,7 @@ CREATE TABLE `users` (
   `country` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `phone_number` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `email` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `password` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
+  `password` varchar(64) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `role_id` int(11) DEFAULT '1',
   `active` varchar(45) COLLATE utf8_slovenian_ci DEFAULT '1',
   PRIMARY KEY (`id`)
