@@ -29,15 +29,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 <html>
     <?php include 'templates/template_head.php'; ?>
-
     <body>
-
         <div class="title" id="title" style="height: 50px; text-align: center"><h1>SELLER</h1></div>
-
-        <?php        include 'templates/template_navigation_bar.php'; ?>
-
+        <?php   include 'templates/template_navigation_bar.php'; ?>
         <div class="context" id="context">
-            
             <!-- CLIENT LIST -->
             <div class="client_list" id="client_list" align = "center">
                 <div style = "width:500px; border: solid 1px #333333; margin: 25px; " align = "center">

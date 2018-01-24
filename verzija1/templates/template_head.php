@@ -7,4 +7,9 @@
     <!--favicons-->
     <link href="https://static.tutsplus.com/assets/favicon-3ef7b4f54ed4378b31ff3124d3c4bff8.png" rel="shortcut icon" type="image/png" />
     <link href="https://static.tutsplus.com/assets/apple-touch-icon-3ef7b4f54ed4378b31ff3124d3c4bff8.png" rel="apple-touch-icon" type="image/png" />
+    <!-- ajax menu add /version1/ for wamp -->
+    <script type="text/javascript" src="ajax-menu/dmenu.js"></script>
+    <noscript><link type="text/css" href="ajax-menu/style.css" rel="stylesheet"></noscript>
+    <!-- menu script init-->
+    <script type="text/javascript" src="ajax-menu/data.js"></script>
 </head>

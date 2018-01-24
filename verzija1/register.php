@@ -3,7 +3,6 @@ session_start();
 
 unset($_SESSION['register_success']);
 
-
 // grab recaptcha library
 // https://webdesign.tutsplus.com/tutorials/how-to-integrate-no-captcha-recaptcha-in-your-website--cms-23024
 require_once "recaptchalib.php";

@@ -30,8 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <body>
 
 <div class="title" id="title" style="height: 50px; text-align: center"><h1>ADMIN</h1></div>
-
-        <?php        include 'templates/template_navigation_bar.php'; ?>
+    <?php   include 'templates/template_navigation_bar.php'; ?>
 <div class="context" id="context">
 
 
@@ -42,8 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             <div style = "margin:30px">
                 <!-- show all sellers -->
                 <?php
-                       
-                       $rez = fetchRows("SELECT id, first_name, last_name, email, active FROM users WHERE role_id = 2");
+                    $rez = fetchRows("SELECT id, first_name, last_name, email, active FROM users WHERE role_id = 2");
                 ?>
                 
                 <?php foreach($rez as $row){ ?>
@@ -80,10 +78,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
         </div>
     </div>
-
-    
 </div>
-
- <?php include 'templates/template_footer.php'; ?>
+<?php include 'templates/template_footer.php'; ?>
 </body>
 </html>

@@ -1,3 +1,4 @@
+/*
 function showOrHide( idOfDiv ) {
     console.log("Show: " + idOfDiv);
     var x = document.getElementById( idOfDiv );
@@ -129,3 +130,4 @@ function printDiv(divName) {
     w.print();
     w.close();
 }
+*/

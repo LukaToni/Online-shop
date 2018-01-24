@@ -12,7 +12,7 @@ if(isset($_POST['submitted'])){
             .$_POST['postal_code']."','".$_POST['country']."','".$_POST['phone_number']."','".$_POST['email']."','".$hash."')";
     $rez = executeQuery("INSERT INTO users (role_id, id, first_name, last_name, street_address"
             . ",city,postal_code,country,phone_number,email,password) "
-            . "VALUES ".$values);
+            . "VALUES".$values);
     
     if($rez == 1){
         $_SESSION['register_success'] = true;
@@ -25,11 +25,8 @@ if(isset($_POST['submitted'])){
     <?php include 'templates/template_head.php'; ?>
 
     <body>
-
         <div class="title" id="title" style="height: 50px; text-align: center"><h1>SELLER</h1></div>
-
-        <?php        include 'templates/template_navigation_bar.php'; ?>
-
+        <?php   include 'templates/template_navigation_bar.php'; ?>
         <div class="context" id="context">
             <!-- TODO: article, in_progress, history update js-->
              <?php if(!isset($_SESSION['register_success'])) { ?>
@@ -64,9 +61,8 @@ if(isset($_POST['submitted'])){
             </div>
             <?php }else{
                  echo "Registration success";
-                 
-                    } ?>
-
+             } ?>
+        </div>
         <?php include 'templates/template_footer.php'; ?>
     </body>
 </html>

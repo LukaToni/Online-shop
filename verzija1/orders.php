@@ -19,27 +19,20 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 <html>
     <?php include 'templates/template_head.php'; ?>
-
     <body>
-
         <div class="title" id="title" style="height: 50px; text-align: center"><h1>Orders</h1></div>
-
-        <?php        include 'templates/template_navigation_bar.php'; ?>
+        <?php   include 'templates/template_navigation_bar.php'; ?>
 
         <div class="context" id="context">
-
-            <?php if($_SERVER['QUERY_STRING'] != "history"){ 
-                
-                
-                ?>
+            <?php if($_SERVER['QUERY_STRING'] != "history"){ ?>
             <table>
                 
-                <?php 
-                
-                if ($_SESSION['role_id'] == 2){
-                $rez = fetchRows("SELECT distinct(order_id) FROM orders WHERE state = 'pending'");
-                
-                foreach($rez as $row){ ?>
+                <?php
+                    if ($_SESSION['role_id'] == 2){
+                    $rez = fetchRows("SELECT distinct(order_id) FROM orders WHERE state = 'pending'");
+
+                    foreach($rez as $row){
+                ?>
                 <form method="post" action ="">
                     <input type="hidden" name="order_id" value="<?php echo $row['order_id']; ?>" />
                 <tr>

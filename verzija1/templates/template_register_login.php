@@ -21,12 +21,12 @@
     </div>
 </li>
 <li class="dropdown">
-                    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  Orders</a>
-                    <div class="dropdown-content">
-                        <a href="orders" onclick="showOrHideSeller('in_progress')"><i class="fas fa-wrench"></i>  In progress</a>
-                        <a href="orders?history" onclick="showOrHideSeller('history')"><i class="fas fa-history"></i>  History</a>
-                    </div>
-                </li>
+    <a href="javascript:void(0)" class="dropbtn"><i class="fas fa-user-circle"></i>  Orders</a>
+    <div class="dropdown-content">
+        <a href="orders" onclick="showOrHideSeller('in_progress')"><i class="fas fa-wrench"></i>  In progress</a>
+        <a href="orders?history" onclick="showOrHideSeller('history')"><i class="fas fa-history"></i>  History</a>
+    </div>
+</li>
 <?php } ?>
 
 <li class="dropdown">
@@ -40,8 +40,5 @@
     </div>
 </li>
 <?php
-
-echo "<li class=\"dropbtn\">Welcome ".$_SESSION['first_name']." ".$_SESSION['last_name']."!</li>"  ;
-
-}
-?>
+    echo "<li class=\"dropbtn\">Welcome ".$_SESSION['first_name']." ".$_SESSION['last_name']."!</li>"  ;
+} ?>

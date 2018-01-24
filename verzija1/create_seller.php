@@ -25,11 +25,10 @@ if(isset($_POST['seller_submitted'])){
 <body>
 
 <div class="title" id="title" style="height: 50px; text-align: center"><h1>ADMIN</h1></div>
-
-        <?php        include 'templates/template_navigation_bar.php'; ?>
+<?php   include 'templates/template_navigation_bar.php'; ?>
 <div class="context" id="context">
 
-     <?php if(!isset($_SESSION['register_success'])) { ?>
+    <?php if(!isset($_SESSION['register_success'])) { ?>
     <!-- CREATE SELLER -->
     <div class="create_seller" id="create_seller" align = "center">
         <div style = "width:300px; border: solid 1px #333333; margin: 25px; " align = "center">
@@ -50,9 +49,8 @@ if(isset($_POST['seller_submitted'])){
         </div>
     </div>
     <?php }else{
-                 echo "Registration success";
-                 
-                    } ?>
+        echo "Registration success";
+     } ?>
 
     <!-- SELLER LIST -->
     <div class="seller_list" id="seller_list" align = "center" style="display: none;">
@@ -126,6 +124,6 @@ if(isset($_POST['seller_submitted'])){
     </div>
 </div>
 
- <?php include 'templates/template_footer.php'; ?>
+<?php include 'templates/template_footer.php'; ?>
 </body>
 </html>
