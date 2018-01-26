@@ -123,10 +123,29 @@ function showOrHideAdmin( idOfDiv ) {
 
 
 function printDiv(divName) {
-
     var printContents = document.getElementById(divName).innerHTML;
     w=window.open();
     w.document.write(printContents);
     w.print();
     w.close();
+}
+
+function Popup() {
+    var printContents = document.getElementById("inside-print").innerHTML;
+    var mywindow = window.open('', 'new div', 'height=400,width=600');
+    mywindow.document.write('<html><head><title></title>');
+    mywindow.document.write('<link rel="stylesheet" type="text/css" href="invoice/css/style.css" />')
+    mywindow.document.write('<link rel="stylesheet" type="text/css" href="invoice/css/print.css" media="print" />')
+    mywindow.document.write('<script type="text/javascript" src="invoice/js/jquery-1.3.2.min.js"></script>')
+    mywindow.document.write('<script type="text/javascript" src="invoice/js/example.js"></script>')
+    mywindow.document.write('<script src="js/script.js"></script>')
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(printContents);
+    mywindow.document.write('</body></html>');
+    mywindow.document.close();
+    mywindow.focus();
+    setTimeout(function(){mywindow.print();},1000);
+    /*mywindow.close();*/
+
+    return true;
 }
