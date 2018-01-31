@@ -8,7 +8,7 @@ include 'database/DB_Engine.php';
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     
-    if($_POST['confirm']){
+    if(isset($_POST['confirm'])){
     executeQuery("UPDATE orders SET state = 'confirmed' WHERE order_id = '".$_POST['order_id']."'");
     }else if($_POST['cancel']){
         executeQuery("UPDATE orders SET state = 'canceled' WHERE order_id = '".$_POST['order_id']."'");
