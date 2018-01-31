@@ -58,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             </table>
             <?php }else{
                 echo "<table>";
-                $rez = fetchRows("SELECT order_id, state FROM orders WHERE state <> 'pending'");
+                $rez = fetchRows("SELECT distinct(order_id), state FROM orders WHERE state <> 'pending'");
                 
                 foreach($rez as $row){ ?>
                
