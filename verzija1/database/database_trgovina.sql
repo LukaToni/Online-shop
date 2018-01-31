@@ -194,7 +194,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (6,'Elon','Musk','','','','','','admin@admin.si','admin',1,'1'),(10,'Anka','Drobec',NULL,NULL,NULL,NULL,NULL,'anka@anka.si','anka',2,'1'),(13,'Miha','Tanko','Zalozniška 20','Ljubljana','1000','Slovenija','031 553 396','miha@miha.si','miha',3,'1'),(14,'Sanja','Oreh','Slovenska 3','Ljubljana','1000','Slovenija','031 349 825','sanja@sanja.si','sanja',3,'1');
+INSERT INTO `users` VALUES (6,'Elon','Musk','','','','','','admin@admin.si','f212bd60369e4bf2b09320cab3d2e8b14e13a3a5006ab20e0a39858d560a27ee',1,'1'),(10,'Anka','Drobec',NULL,NULL,NULL,NULL,NULL,'anka@anka.si','anka',2,'1'),(13,'Miha','Tanko','Zalozniška 20','Ljubljana','1000','Slovenija','031 553 396','miha@miha.si','miha',3,'1'),(14,'Sanja','Oreh','Slovenska 3','Ljubljana','1000','Slovenija','031 349 825','sanja@sanja.si','sanja',3,'1');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
