@@ -8,7 +8,7 @@ unset($_SESSION['register_success']);
 
 if(isset($_POST['submitted'])){
     include 'database/DB_Engine.php';
-    $values = "(NULL,'".$_POST['name']."','".$_POST['price']."','".$_POST['desc']."', NULL)";
+    $values = "(NULL,'".htmlspecialchars($_POST['name'])."',".$_POST['price'].",'".htmlspecialchars($_POST['desc'])."', NULL)";
     $rez = executeQuery("INSERT INTO articles (id, name, price, description, active) "
             . "VALUES ".$values);
     

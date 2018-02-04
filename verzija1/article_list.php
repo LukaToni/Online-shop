@@ -12,8 +12,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }else if(isset($_POST['deactivate'])){
         executeQuery("UPDATE articles SET active = 0 WHERE id = ".$_POST['article_id']);
     }else if(isset($_POST['update'])){
-        executeQuery("UPDATE articles SET name = '".$_POST['name']."', "
-            . "price = '".$_POST['price']."', description = '".$_POST['desc']."' WHERE id = ".$_POST['article_id']);
+        executeQuery("UPDATE articles SET name = '".htmlspecialchars($_POST['name'])."', "
+            . "price = '".$_POST['price']."', description = '".htmlspecialchars($_POST['desc'])."' WHERE id = ".$_POST['article_id']);
         
     }
 }      

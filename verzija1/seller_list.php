@@ -13,8 +13,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }else if(isset($_POST['deactivate'])){
         executeQuery("UPDATE users SET active = 0 WHERE id = ".$_POST['seller_id']);
     }else if(isset($_POST['update'])){
-        executeQuery("UPDATE users SET first_name = '".$_POST['first']."', "
-            . "last_name = '".$_POST['last']."', email = '".$_POST['email']."' WHERE id = ".$_POST['seller_id']);
+        executeQuery("UPDATE users SET first_name = '".htmlspecialchars($_POST['first'])."', "
+            . "last_name = '".htmlspecialchars($_POST['last'])."', email = '".htmlspecialchars($_POST['email'])."' WHERE id = ".$_POST['seller_id']);
         
         if(strlen($_POST['new_password']) > 0){
             $hash = hash('sha256', $_POST['new_password']."greensalt");

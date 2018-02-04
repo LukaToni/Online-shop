@@ -56,7 +56,7 @@ $reCaptcha = new ReCaptcha($secret);
 
                                         include 'database/DB_Engine.php';
                                         $hash = hash('sha256', $_POST['password']."greensalt");
-                                        $values = "(NULL,'".$_POST['email']."','".$hash."', 4)";
+                                        $values = "(NULL,'".htmlspecialchars($_POST['email'])."','".$hash."', 4)";
                                         $rez = executeQuery("INSERT INTO users (id, email, password, role_id) "
                                             . "VALUES ".$values);
 

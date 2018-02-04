@@ -7,11 +7,11 @@ if(!isset($_SESSION['logged_in'])){
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     include 'database/DB_Engine.php';
-    if(executeQuery("UPDATE users SET first_name = '".$_POST['first']."', "
-            . "last_name = '".$_POST['last']."', email = '".$_POST['email']."' WHERE id = ".$_SESSION['user_id'])){
-        $_SESSION['first_name'] = $_POST['first'];
-        $_SESSION['last_name'] = $_POST['last'];
-        $_SESSION['email'] = $_POST['email'];
+    if(executeQuery("UPDATE users SET first_name = '".htmlspecialchars($_POST['first'])."', "
+            . "last_name = '".htmlspecialchars($_POST['last'])."', email = '".htmlspecialchars($_POST['email'])."' WHERE id = ".$_SESSION['user_id'])){
+        $_SESSION['first_name'] = htmlspecialchars($_POST['first']);
+        $_SESSION['last_name'] = htmlspecialchars($_POST['last']);
+        $_SESSION['email'] = htmlspecialchars($_POST['email']);
     }
     
     if(strlen($_POST['old_password']) > 0){
@@ -27,7 +27,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 <html>
     <?php include 'templates/template_head.php'; ?>
-
     <body>
 
         <div class="title" id="title" style="height: 50px; text-align: center"><h1>INDEX</h1></div>

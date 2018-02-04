@@ -9,7 +9,7 @@ unset($_SESSION['register_success']);
 if(isset($_POST['seller_submitted'])){
     include 'database/DB_Engine.php';
     $hash = hash('sha256', $_POST['password']."greensalt");
-    $values = "(2,NULL,'".$_POST['first']."','".$_POST['last']."',NULL,NULL,NULL,NULL,NULL,'".$_POST['email']."','".$hash."')";
+    $values = "(2,NULL,'".htmlspecialchars($_POST['first'])."','".htmlspecialchars($_POST['last'])."',NULL,NULL,NULL,NULL,NULL,'".htmlspecialchars($_POST['email'])."','".$hash."')";
     $rez = executeQuery("INSERT INTO users (role_id,id, first_name, last_name, street_address"
             . ",city,postal_code,country,phone_number,email,password) "
             . "VALUES ".$values);
