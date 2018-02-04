@@ -1,4 +1,5 @@
 <?php
+include 'https.php';
 session_start();
 if(!isset($_SESSION['logged_in']) || $_SESSION['role_id'] != 2){
     header('Location: index');

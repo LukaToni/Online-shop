@@ -1,210 +1,281 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
---
--- Host: localhost    Database: spletna_trgovina
--- ------------------------------------------------------
--- Server version	5.7.19
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     17. 12. 2017 15:29:57                        */
+/*==============================================================*/
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Table structure for table `articles`
---
+drop table if exists AKCIJA;
 
-DROP TABLE IF EXISTS `articles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `articles` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
-  `price` float NOT NULL,
-  `description` varchar(220) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `active` tinyint(4) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+drop table if exists ARTIKEL;
 
---
--- Dumping data for table `articles`
---
+drop table if exists INVENTURA;
 
-LOCK TABLES `articles` WRITE;
-/*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` VALUES (4,'Trousers',20,'Blue trousers for adults',1),(5,'Shirt',4,'small red shirt',1);
-/*!40000 ALTER TABLE `articles` ENABLE KEYS */;
-UNLOCK TABLES;
+drop table if exists KATEGORIJA;
 
---
--- Table structure for table `articles_image`
---
+drop table if exists KOSARICA;
 
-DROP TABLE IF EXISTS `articles_image`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `articles_image` (
-  `article_id` int(11) NOT NULL,
-  `imageHash` varchar(32) COLLATE utf8_slovenian_ci NOT NULL,
-  `image` mediumblob NOT NULL,
-  PRIMARY KEY (`article_id`,`imageHash`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+drop table if exists KUPEC;
 
---
--- Dumping data for table `articles_image`
---
+drop table if exists MNENJE;
 
-LOCK TABLES `articles_image` WRITE;
-/*!40000 ALTER TABLE `articles_image` DISABLE KEYS */;
-/*!40000 ALTER TABLE `articles_image` ENABLE KEYS */;
-UNLOCK TABLES;
+drop table if exists NAROCILO;
 
---
--- Table structure for table `articles_rating`
---
+drop table if exists OSEBA;
 
-DROP TABLE IF EXISTS `articles_rating`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `articles_rating` (
-  `article_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `rating` int(11) NOT NULL,
-  PRIMARY KEY (`article_id`,`user_id`,`rating`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+drop table if exists PLACA;
 
---
--- Dumping data for table `articles_rating`
---
+drop table if exists POSTA;
 
-LOCK TABLES `articles_rating` WRITE;
-/*!40000 ALTER TABLE `articles_rating` DISABLE KEYS */;
-INSERT INTO `articles_rating` VALUES (1,13,5),(1,14,4),(4,13,1),(4,14,3);
-/*!40000 ALTER TABLE `articles_rating` ENABLE KEYS */;
-UNLOCK TABLES;
+drop table if exists RACUN;
 
---
--- Table structure for table `orders`
---
+drop table if exists RELATIONSHIP_4;
 
-DROP TABLE IF EXISTS `orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `orders` (
-  `order_id` varchar(32) COLLATE utf8_slovenian_ci NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `article_id` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `state` varchar(20) COLLATE utf8_slovenian_ci DEFAULT 'pending',
-  PRIMARY KEY (`order_id`,`user_id`,`article_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+drop table if exists VLOGA;
 
---
--- Dumping data for table `orders`
---
+drop table if exists ZAPOSLEN;
 
-LOCK TABLES `orders` WRITE;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('b37b5f0d66909d3cc26ac3dfa1787cb8',13,1,2,'confirmed');
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
-UNLOCK TABLES;
+/*==============================================================*/
+/* Table: AKCIJA                                                */
+/*==============================================================*/
+create table AKCIJA
+(
+   ID_ARTIKLA           varchar(1024) not null,
+   ID_AKCIJE            varchar(1024) not null,
+   KOLICINA_POPUSTA     float,
+   primary key (ID_ARTIKLA, ID_AKCIJE)
+);
 
---
--- Table structure for table `roles`
---
+/*==============================================================*/
+/* Table: ARTIKEL                                               */
+/*==============================================================*/
+create table ARTIKEL
+(
+   ID_ARTIKLA           varchar(1024) not null,
+   KOLICINA             int not null,
+   ID_KATEGORIJE        varchar(1024) not null,
+   IME_ARTIKLA          varchar(1024),
+   BARVA_ARTIKLA        varchar(1024),
+   VELIKOST_ARTIKLA     char(1),
+   CENA_ARTIKLA         float not null,
+   primary key (ID_ARTIKLA)
+);
 
-DROP TABLE IF EXISTS `roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `roles` (
-  `role_id` int(11) NOT NULL,
-  `role_name` varchar(45) COLLATE utf8_slovenian_ci NOT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+/*==============================================================*/
+/* Table: INVENTURA                                             */
+/*==============================================================*/
+create table INVENTURA
+(
+   KOLICINA             int not null,
+   ID_ARTIKLA           varchar(1024) not null,
+   primary key (KOLICINA)
+);
 
---
--- Dumping data for table `roles`
---
+/*==============================================================*/
+/* Table: KATEGORIJA                                            */
+/*==============================================================*/
+create table KATEGORIJA
+(
+   ID_KATEGORIJE        varchar(1024) not null,
+   IME_KATEGORIJE       varchar(1024),
+   primary key (ID_KATEGORIJE)
+);
 
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'admin'),(2,'seller'),(3,'client'),(4,'anonymous');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
+/*==============================================================*/
+/* Table: KOSARICA                                              */
+/*==============================================================*/
+create table KOSARICA
+(
+   ID_ARTIKLA           varchar(1024) not null,
+   ID_NAROCILA          varchar(1024) not null,
+   primary key (ID_ARTIKLA, ID_NAROCILA)
+);
 
---
--- Table structure for table `shopping_cart`
---
+/*==============================================================*/
+/* Table: KUPEC                                                 */
+/*==============================================================*/
+create table KUPEC
+(
+   ID_OSEBE             varchar(1024) not null,
+   DATUM_VCLANITVE      date not null,
+   POSTNA_ST            int,
+   IME                  varchar(1024),
+   PRIIMEK              varchar(1024),
+   TEL_STEVILKA         char(9),
+   ULICA                varchar(1024),
+   HISNA_ST             varchar(1024),
+   primary key (ID_OSEBE, DATUM_VCLANITVE)
+);
 
-DROP TABLE IF EXISTS `shopping_cart`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `shopping_cart` (
-  `user_id` int(11) NOT NULL,
-  `article_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+/*==============================================================*/
+/* Table: MNENJE                                                */
+/*==============================================================*/
+create table MNENJE
+(
+   ID_ARTIKLA           varchar(1024) not null,
+   ID_OSEBE             varchar(1024) not null,
+   DATUM_VCLANITVE      date not null,
+   ID_MNENJA            varchar(1024) not null,
+   OCENA                int,
+   TEKST                varchar(1024),
+   primary key (ID_ARTIKLA, ID_OSEBE, DATUM_VCLANITVE, ID_MNENJA)
+);
 
---
--- Dumping data for table `shopping_cart`
---
+/*==============================================================*/
+/* Table: NAROCILO                                              */
+/*==============================================================*/
+create table NAROCILO
+(
+   ID_NAROCILA          varchar(1024) not null,
+   RAC_ID_NAROCILA      varchar(1024),
+   SIFRA_RACUNA         varchar(1024),
+   ID_OSEBE             varchar(1024) not null,
+   DATUM_VCLANITVE      date not null,
+   primary key (ID_NAROCILA)
+);
 
-LOCK TABLES `shopping_cart` WRITE;
-/*!40000 ALTER TABLE `shopping_cart` DISABLE KEYS */;
-/*!40000 ALTER TABLE `shopping_cart` ENABLE KEYS */;
-UNLOCK TABLES;
+/*==============================================================*/
+/* Table: OSEBA                                                 */
+/*==============================================================*/
+create table OSEBA
+(
+   ID_OSEBE             varchar(1024) not null,
+   POSTNA_ST            int not null,
+   IME                  varchar(1024),
+   PRIIMEK              varchar(1024),
+   TEL_STEVILKA         char(9),
+   ULICA                varchar(1024),
+   HISNA_ST             varchar(1024),
+   primary key (ID_OSEBE)
+);
 
---
--- Table structure for table `users`
---
+/*==============================================================*/
+/* Table: PLACA                                                 */
+/*==============================================================*/
+create table PLACA
+(
+   URNA_POSTAVKA        float not null,
+   ID_OSEBE             varchar(1024) not null,
+   DATUM_ZAPOSLITVE     date not null,
+   DODATEK              float,
+   primary key (URNA_POSTAVKA)
+);
 
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `last_name` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `street_address` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `city` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `postal_code` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `country` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `phone_number` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `email` varchar(45) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `password` varchar(64) COLLATE utf8_slovenian_ci DEFAULT NULL,
-  `role_id` int(11) DEFAULT '1',
-  `active` varchar(45) COLLATE utf8_slovenian_ci DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+/*==============================================================*/
+/* Table: POSTA                                                 */
+/*==============================================================*/
+create table POSTA
+(
+   POSTNA_ST            int not null,
+   KRAJ                 varchar(1024),
+   primary key (POSTNA_ST)
+);
 
---
--- Dumping data for table `users`
---
+/*==============================================================*/
+/* Table: RACUN                                                 */
+/*==============================================================*/
+create table RACUN
+(
+   ID_NAROCILA          varchar(1024) not null,
+   SIFRA_RACUNA         varchar(1024) not null,
+   SKUPNA_VSOTA         float,
+   DATUM_IZDAJE         datetime,
+   primary key (ID_NAROCILA, SIFRA_RACUNA)
+);
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (6,'Elon','Musk','','','','','','admin@admin.si','f212bd60369e4bf2b09320cab3d2e8b14e13a3a5006ab20e0a39858d560a27ee',1,'1'),(10,'Anka','Drobec',NULL,NULL,NULL,NULL,NULL,'anka@anka.si','anka',2,'1'),(13,'Miha','Tanko','Zalozniška 20','Ljubljana','1000','Slovenija','031 553 396','miha@miha.si','miha',3,'1'),(14,'Sanja','Oreh','Slovenska 3','Ljubljana','1000','Slovenija','031 349 825','sanja@sanja.si','sanja',3,'1');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+/*==============================================================*/
+/* Table: RELATIONSHIP_4                                        */
+/*==============================================================*/
+create table RELATIONSHIP_4
+(
+   ID_NAROCILA          varchar(1024) not null,
+   KOLICINA             int not null,
+   primary key (ID_NAROCILA, KOLICINA)
+);
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*==============================================================*/
+/* Table: VLOGA                                                 */
+/*==============================================================*/
+create table VLOGA
+(
+   ID                   varchar(1024) not null,
+   IME_VLOGE            varchar(1024),
+   primary key (ID)
+);
 
--- Dump completed on 2018-01-15  1:56:53
+/*==============================================================*/
+/* Table: ZAPOSLEN                                              */
+/*==============================================================*/
+create table ZAPOSLEN
+(
+   ID_OSEBE             varchar(1024) not null,
+   DATUM_ZAPOSLITVE     date not null,
+   PLACA                float not null,
+   VLOGA                varchar(1024) not null,
+   URNA_POSTAVKA        float not null,
+   ID                   varchar(1024) not null,
+   POSTNA_ST            int,
+   IME                  varchar(1024),
+   PRIIMEK              varchar(1024),
+   TEL_STEVILKA         char(9),
+   ULICA                varchar(1024),
+   HISNA_ST             varchar(1024),
+   primary key (ID_OSEBE, DATUM_ZAPOSLITVE)
+);
+
+alter table AKCIJA add constraint FK_V_AKCIJI foreign key (ID_ARTIKLA)
+      references ARTIKEL (ID_ARTIKLA) on delete restrict on update restrict;
+
+alter table ARTIKEL add constraint FK_JE_V_KATEGORIJI foreign key (ID_KATEGORIJE)
+      references KATEGORIJA (ID_KATEGORIJE) on delete restrict on update restrict;
+
+alter table ARTIKEL add constraint FK_VSEBUJE_ARTIKEL2 foreign key (KOLICINA)
+      references INVENTURA (KOLICINA) on delete restrict on update restrict;
+
+alter table INVENTURA add constraint FK_VSEBUJE_ARTIKEL foreign key (ID_ARTIKLA)
+      references ARTIKEL (ID_ARTIKLA) on delete restrict on update restrict;
+
+alter table KOSARICA add constraint FK_KOSARICA foreign key (ID_ARTIKLA)
+      references ARTIKEL (ID_ARTIKLA) on delete restrict on update restrict;
+
+alter table KOSARICA add constraint FK_KOSARICA2 foreign key (ID_NAROCILA)
+      references NAROCILO (ID_NAROCILA) on delete restrict on update restrict;
+
+alter table KUPEC add constraint FK_PODEDUJE_PODATKE2 foreign key (ID_OSEBE)
+      references OSEBA (ID_OSEBE) on delete restrict on update restrict;
+
+alter table MNENJE add constraint FK_IMA_MNENJE_O_ARTIKLU foreign key (ID_OSEBE, DATUM_VCLANITVE)
+      references KUPEC (ID_OSEBE, DATUM_VCLANITVE) on delete restrict on update restrict;
+
+alter table MNENJE add constraint FK_IMA_OCENO foreign key (ID_ARTIKLA)
+      references ARTIKEL (ID_ARTIKLA) on delete restrict on update restrict;
+
+alter table NAROCILO add constraint FK_IMA_NAROCILO foreign key (ID_OSEBE, DATUM_VCLANITVE)
+      references KUPEC (ID_OSEBE, DATUM_VCLANITVE) on delete restrict on update restrict;
+
+alter table NAROCILO add constraint FK_IMA_RACUN foreign key (RAC_ID_NAROCILA, SIFRA_RACUNA)
+      references RACUN (ID_NAROCILA, SIFRA_RACUNA) on delete restrict on update restrict;
+
+alter table OSEBA add constraint FK_IMA_POSTO foreign key (POSTNA_ST)
+      references POSTA (POSTNA_ST) on delete restrict on update restrict;
+
+alter table PLACA add constraint FK_IMA_PLACO2 foreign key (ID_OSEBE, DATUM_ZAPOSLITVE)
+      references ZAPOSLEN (ID_OSEBE, DATUM_ZAPOSLITVE) on delete restrict on update restrict;
+
+alter table RACUN add constraint FK_IMA_RACUN2 foreign key (ID_NAROCILA)
+      references NAROCILO (ID_NAROCILA) on delete restrict on update restrict;
+
+alter table RELATIONSHIP_4 add constraint FK_RELATIONSHIP_4 foreign key (ID_NAROCILA)
+      references NAROCILO (ID_NAROCILA) on delete restrict on update restrict;
+
+alter table RELATIONSHIP_4 add constraint FK_RELATIONSHIP_5 foreign key (KOLICINA)
+      references INVENTURA (KOLICINA) on delete restrict on update restrict;
+
+alter table ZAPOSLEN add constraint FK_IMA_PLACO foreign key (URNA_POSTAVKA)
+      references PLACA (URNA_POSTAVKA) on delete restrict on update restrict;
+
+alter table ZAPOSLEN add constraint FK_IMA_VLOGO foreign key (ID)
+      references VLOGA (ID) on delete restrict on update restrict;
+
+alter table ZAPOSLEN add constraint FK_PODEDUJE_PODATKE foreign key (ID_OSEBE)
+      references OSEBA (ID_OSEBE) on delete restrict on update restrict;
+

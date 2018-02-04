@@ -1,6 +1,23 @@
 <?php
-session_start();
 include 'database/DB_engine.php';
+function myorder($id){
+    $count = countResults("SELECT count(user_id) FROM orders WHERE"
+                                        . " user_id = ".$_SESSION['user_id']." and order_id = '"
+                                        .$id."'");
+    return $count;
+}
+
+session_start();
+if(!isset($_SESSION['logged_in']) || $_SESSION['role_id'] >= 4){
+    header('Location: index');
+}
+if($_SESSION['role_id'] == 3){
+    if(!myorder($_GET['order_id'])){
+        header('Location: index');
+    }
+}
+include 'https.php';
+
 ?>
 
 <html>

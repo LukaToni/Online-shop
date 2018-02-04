@@ -1,4 +1,5 @@
 <?php
+include 'https.php';
 session_start();
 
 unset($_SESSION['register_success']);

@@ -1,4 +1,5 @@
 <?php
+include 'https.php';
 session_start();
 if(isset($_SESSION['logged_in'])){
     header('Location: index');
@@ -18,6 +19,7 @@ if(isset($_POST['login_submitted'])){
         $_SESSION['last_name'] = $data['last_name'];
         $_SESSION['role_id'] = $data['role_id'];
         $_SESSION['email'] = $data['email'];
+        session_regenerate_id();
         header('Location: index');
     }
 }

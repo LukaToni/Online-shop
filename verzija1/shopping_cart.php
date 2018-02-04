@@ -3,6 +3,7 @@ session_start();
 if(!isset($_SESSION['logged_in'])){
     header('Location: index');
 }
+include 'https.php';
 include 'database/DB_Engine.php';
 
 $article_added = false;
