@@ -27,7 +27,8 @@ function executeQuery($query){
 function countResults($query){
     global $db;
     $statement = $db->prepare($query);
-    return $statement->execute()->fetchColumn();
+    $statement->execute();
+    return $statement->fetchColumn();
 }
 
 function getUserData($query){
