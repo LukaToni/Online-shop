@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <!-- show all articles -->
                 <?php
                        
-                       $rez = fetchRows("SELECT id, name, price, description, active FROM articles");
+                       $rez = fetchRows("SELECT id, name, price, description, active, image, image_type FROM articles");
                 ?>
                 
                 <?php foreach($rez as $row){ 
@@ -72,7 +72,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <tr>
                         <form action="" method="post">
                             <input type="hidden" name="article_id" value="<?php echo $row['id']; ?>">
-                            <td><?php echo $row['name'] ?></td>
+                            <td><?php echo $row['name'] ?>
+                            <?php 
+                            if($row['image_type'] == "image/jpeg"){
+                            echo '<br/><img src="data:image/jpeg;base64,'.base64_encode($row['image']).'" style="width: 100px; height: 100px;"/>';
+                            }else if($row['image_type'] == "image/jpeg"){
+                                echo '<br/><img src="data:image/png;base64,'.base64_encode($row['image']).'" style="width: 100px; height: 100px;"/>';
+                            }else{
+                                
+                            }
+                            ?>
+                            </td>
                             <td><?php echo $row['description'] ?></td>
                             <!--<td>1</td>-->
                             <td><?php echo $row['price'] ?></td>
@@ -104,7 +114,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <?php }else{ ?>
                     <tr>
                             <input type="hidden" name="article_id" value="<?php echo $row['id']; ?>">
-                            <td><?php echo $row['name'] ?></td>
+                            <td><?php echo $row['name'] ?>
+                            <?php 
+                            if($row['image_type'] == "image/jpeg"){
+                            echo '<br/><img src="data:image/jpeg;base64,'.base64_encode($row['image']).'" style="width: 100px; height: 100px;"/>';
+                            }else if($row['image_type'] == "image/jpeg"){
+                                echo '<br/><img src="data:image/png;base64,'.base64_encode($row['image']).'" style="width: 100px; height: 100px;"/>';
+                            }else{
+                                
+                            }
+                            ?>
+                            </td>
                             <td><?php echo $row['description'] ?></td>
                             <td><?php echo $row['price'] ?></td>
                             <td>

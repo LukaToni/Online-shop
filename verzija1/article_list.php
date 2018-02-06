@@ -15,6 +15,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         executeQuery("UPDATE articles SET name = '".htmlspecialchars($_POST['name'])."', "
             . "price = '".$_POST['price']."', description = '".htmlspecialchars($_POST['desc'])."' WHERE id = ".$_POST['article_id']);
         
+        $image = null;
+        $type = $_FILES['image']['type'];
+    if($_FILES['image']['size'] > 0){
+    $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+    }
+    
+    if($image != null){
+        executeQuery("UPDATE articles SET image = '$image', image_type='$type' WHERE "
+                . "id = ".$_POST['article_id']);
+        }
+    }else if(isset($_POST['delete_image'])){
+        executeQuery("UPDATE articles SET image = null, image_type= null WHERE "
+                . "id = ".$_POST['article_id']);
     }
 }      
         
@@ -37,11 +50,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <!-- show all articles -->
                 <?php
                        
-                       $rez = fetchRows("SELECT id, name, price, description, active FROM articles");
+                       $rez = fetchRows("SELECT id, name, price, description, active, image, image_type FROM articles");
                 ?>
                 
                 <?php foreach($rez as $row){ ?>
-                <form action = "" method = "post">
+                <form action = "" method = "post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="column">
                             <label>Article ID: <?php echo $row['id']; ?></label><br/>
@@ -59,11 +72,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <input type = "text" name = "price" class = "box" value="<?php echo $row['price'] ?>"/><br/><br/>
                             <label>Description:</label><br/>
                             <input type = "text" name = "desc" class = "box" value="<?php echo $row['description'] ?>" /><br/><br/>
+                            <label>Image: </label><br/>
+                            <?php 
+                            if($row['image_type'] == "image/jpeg"){
+                            echo '<img src="data:image/jpeg;base64,'.base64_encode($row['image']).'" name="img" style="width: 100px; height: 100px;"/>';
+                            }else if($row['image_type'] == "image/png"){
+                                echo '<img src="data:image/png;base64,'.base64_encode($row['image']).' name="img" style="width: 100px; height: 100px;"/>';
+                            }else{
+                                echo "<input type=\"file\" name=\"image\" class = \"box\" value=\"Add image\">";
+                            }
+                            ?>
                         </div>
                         <div class="column" style="margin-top: 70px;">
                             <input type = "submit" name="activate"    value = " Activate "    style="display: block; width: 100px;"/><br/>
                             <input type = "submit" name="deactivate"  value = " Deactivate "  style="display: block; width: 100px;"/><br/>
                             <input type = "submit" name="update"      value = " Update "      style="display: block; width: 100px;"/><br/>
+                            <input type = "submit" name="delete_image"      value = " Delete image "      style="display: block; width: 100px;"/><br/>
                         </div>
                     </div>
                 </form>

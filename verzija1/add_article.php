@@ -6,11 +6,28 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['role_id'] != 2){
 }
 unset($_SESSION['register_success']);
 
-if(isset($_POST['submitted'])){
+
+if(isset($_POST['submitted']) && isset($_FILES['image'])){
     include 'database/DB_Engine.php';
-    $values = "(NULL,'".htmlspecialchars($_POST['name'])."',".$_POST['price'].",'".htmlspecialchars($_POST['desc'])."', NULL)";
-    $rez = executeQuery("INSERT INTO articles (id, name, price, description, active) "
+    $image = null;
+    if($_FILES['image']['size'] > 0){
+    $image = addslashes(file_get_contents($_FILES['image']['tmp_name']));
+    }
+    
+    $rez = 0;
+    if($image == null){
+        $values = "(NULL,'".htmlspecialchars($_POST['name'])."',".$_POST['price'].",'".htmlspecialchars($_POST['desc'])."',null, null ,NULL)";
+    $rez = executeQuery("INSERT INTO articles (id, name, price, description, image,image_type active) "
             . "VALUES ".$values);
+    }else{
+        $type = $_FILES['image']['type'];
+        echo $type;
+        exit();
+        $values = "(NULL,'".htmlspecialchars($_POST['name'])."',".$_POST['price'].",'".htmlspecialchars($_POST['desc'])."','$image', '$type' ,NULL)";
+    $rez = executeQuery("INSERT INTO articles (id, name, price, description, image, image_type,active) "
+            . "VALUES ".$values);
+    }
+    
     
     if($rez == 1){
         $_SESSION['register_success'] = true;
@@ -34,9 +51,9 @@ if(isset($_POST['submitted'])){
         <div style = "width:300px; border: solid 1px #333333; margin: 25px; " align = "center">
             <div style = "background-color:#333333; color:#FFFFFF; padding:3px;"><b>Add article</b></div>
             <div style = "margin:30px">
-                <form action = "" method = "post">
+                <form action = "" method = "post" enctype="multipart/form-data">
                     <label>Picture: (NotImplemented)</label><br/>
-                    <input type="file" name="image[]" multiple="true" class = "box" /><br/><br/>
+                    <input type="file" name="image" class = "box" /><br/><br/>
                     <label>Name:</label><br/>
                     <input type = "text" name = "name" class = "box" /><br/><br/>
                     <label>Price:</label><br/>
