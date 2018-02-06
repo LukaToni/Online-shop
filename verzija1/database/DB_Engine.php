@@ -41,4 +41,9 @@ function fetchRows($query){
     return $db->query($query);
 }
 
+function fetchRow($query){
+    global $db;
+    return $db->query($query)->fetch();
+}
+
 ?>

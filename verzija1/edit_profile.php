@@ -7,11 +7,31 @@ if(!isset($_SESSION['logged_in'])){
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     include 'database/DB_Engine.php';
-    if(executeQuery("UPDATE users SET first_name = '".htmlspecialchars($_POST['first'])."', "
-            . "last_name = '".htmlspecialchars($_POST['last'])."', email = '".htmlspecialchars($_POST['email'])."' WHERE id = ".$_SESSION['user_id'])){
-        $_SESSION['first_name'] = htmlspecialchars($_POST['first']);
-        $_SESSION['last_name'] = htmlspecialchars($_POST['last']);
-        $_SESSION['email'] = htmlspecialchars($_POST['email']);
+    
+    if($_SESSION['role_id'] == 3){
+        executeQuery("UPDATE users SET first_name = '".htmlspecialchars($_POST['first'])."', "
+            . "last_name = '".htmlspecialchars($_POST['last'])."', email = '".htmlspecialchars($_POST['email'])."' WHERE id = ".$_SESSION['user_id']);
+        executeQuery("UPDATE users SET street_address = '".htmlspecialchars($_POST['address'])."', "
+            . "country = '".htmlspecialchars($_POST['country'])."', postal_code = '".htmlspecialchars($_POST['postal'])."', "
+                . "phone_number = '".htmlspecialchars($_POST['phone'])."' WHERE id = ".$_SESSION['user_id']);
+        executeQuery("UPDATE users SET city ='".htmlspecialchars($_POST['city'])."' WHERE id = ".$_SESSION['user_id']);
+            $_SESSION['first_name'] = htmlspecialchars($_POST['first']);
+            $_SESSION['last_name'] = htmlspecialchars($_POST['last']);
+            $_SESSION['email'] = htmlspecialchars($_POST['email']);
+            $_SESSION['street'] = htmlspecialchars($_POST['address']);
+            $_SESSION['city'] = htmlspecialchars($_POST['city']);
+            $_SESSION['postal'] = htmlspecialchars($_POST['postal']);
+            $_SESSION['country'] = htmlspecialchars($_POST['country']);
+            $_SESSION['phone'] = htmlspecialchars($_POST['phone']);
+        
+    }else{
+    
+        if(executeQuery("UPDATE users SET first_name = '".htmlspecialchars($_POST['first'])."', "
+                . "last_name = '".htmlspecialchars($_POST['last'])."', email = '".htmlspecialchars($_POST['email'])."' WHERE id = ".$_SESSION['user_id'])){
+            $_SESSION['first_name'] = htmlspecialchars($_POST['first']);
+            $_SESSION['last_name'] = htmlspecialchars($_POST['last']);
+            $_SESSION['email'] = htmlspecialchars($_POST['email']);
+        }
     }
     
     if(strlen($_POST['old_password']) > 0){
@@ -42,6 +62,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             <input type = "text" name = "first" class = "box" value="<?php echo $_SESSION['first_name'] ?>"/><br/><br/>
                             <label>Last name:</label><br/>
                             <input type = "text" name = "last" class = "box" value="<?php echo $_SESSION['last_name'] ?>"/><br/><br/>
+                            <?php if($_SESSION['role_id'] == 3){ ?>
+                            <label>Street address:</label><br/>
+                            <input type = "text" name = "address" class = "box" value="<?php echo $_SESSION['street'] ?>"/><br/><br/>
+                            <label>City:</label><br/>
+                            <input type = "text" name = "city" class = "box" value="<?php echo $_SESSION['city'] ?>"/><br/><br/>
+                            <label>Postal code:</label><br/>
+                            <input type = "text" name = "postal" class = "box" value="<?php echo $_SESSION['postal'] ?>"/><br/><br/>
+                            <label>Country:</label><br/>
+                            <input type = "text" name = "country" class = "box" value="<?php echo $_SESSION['country'] ?>"/><br/><br/>
+                            <label>Phone number:</label><br/>
+                            <input type = "text" name = "phone" class = "box" value="<?php echo $_SESSION['phone'] ?>"/><br/><br/>
+                            <?php } ?>
                             <label>Email:</label><br/>
                             <input type = "text" name = "email" class = "box" value="<?php echo $_SESSION['email'] ?>"/><br/><br/>
                             <label>Old password:</label><br/>

@@ -12,15 +12,26 @@ if(isset($_POST['login_submitted'])){
     $values = "WHERE email='".$_POST['email']."' and password='".$hash."'";
     $rez = countResults("SELECT COUNT(*) FROM users ".$values);
     if($rez == 1){
-        $data = getUserData("SELECT id, first_name, last_name, role_id, email FROM users ".$values);
+        $data = getUserData("SELECT id, first_name, last_name, role_id, email, active FROM users ".$values);
+        #$data = getUserData("SELECT * FROM users ".$values);
+        if($data['active'] == "1"){
+        
         $_SESSION['logged_in'] = true;
         $_SESSION['user_id'] = $data['id'];
         $_SESSION['first_name'] = $data['first_name'];
         $_SESSION['last_name'] = $data['last_name'];
         $_SESSION['role_id'] = $data['role_id'];
         $_SESSION['email'] = $data['email'];
+        if($data['role_id'] == 3){
+        $_SESSION['street'] = $data['street_address'];
+        $_SESSION['city'] = $data['city'];
+        $_SESSION['postal'] = $data['postal_code'];
+        $_SESSION['country'] = $data['country'];
+        $_SESSION['phone'] = $data['phone_number'];
+        }
         session_regenerate_id();
         header('Location: index');
+        }
     }
 }
 
