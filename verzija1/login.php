@@ -12,8 +12,7 @@ if(isset($_POST['login_submitted'])){
     $values = "WHERE email='".$_POST['email']."' and password='".$hash."'";
     $rez = countResults("SELECT COUNT(*) FROM users ".$values);
     if($rez == 1){
-        $data = getUserData("SELECT id, first_name, last_name, role_id, email, active FROM users ".$values);
-        #$data = getUserData("SELECT * FROM users ".$values);
+        $data = getUserData("SELECT * FROM users ".$values);
         if($data['active'] == "1"){
         
         $_SESSION['logged_in'] = true;
