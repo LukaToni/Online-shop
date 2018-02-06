@@ -4,36 +4,6 @@ session_start();
 if(isset($_SESSION['logged_in'])){
     header('Location: index');
 }
-
-
-if(isset($_POST['login_submitted'])){
-    include 'database/DB_Engine.php';
-    $hash = hash('sha256', $_POST['password']."greensalt");
-    $values = "WHERE email='".$_POST['email']."' and password='".$hash."'";
-    $rez = countResults("SELECT COUNT(*) FROM users ".$values);
-    if($rez == 1){
-        $data = getUserData("SELECT * FROM users ".$values);
-        if($data['active'] == "1"){
-        
-        $_SESSION['logged_in'] = true;
-        $_SESSION['user_id'] = $data['id'];
-        $_SESSION['first_name'] = $data['first_name'];
-        $_SESSION['last_name'] = $data['last_name'];
-        $_SESSION['role_id'] = $data['role_id'];
-        $_SESSION['email'] = $data['email'];
-        if($data['role_id'] == 3){
-        $_SESSION['street'] = $data['street_address'];
-        $_SESSION['city'] = $data['city'];
-        $_SESSION['postal'] = $data['postal_code'];
-        $_SESSION['country'] = $data['country'];
-        $_SESSION['phone'] = $data['phone_number'];
-        }
-        session_regenerate_id();
-        header('Location: index');
-        }
-    }
-}
-
 ?>
 
 <html>
@@ -59,14 +29,46 @@ if(isset($_POST['login_submitted'])){
                             <?php 
                             if(isset($_SESSION['error_msg_login'])){
                                 echo $_SESSION['error_msg_login'];
-                            } 
+                            }
+
+                            if(isset($_POST['login_submitted'])){
+                                include 'database/DB_Engine.php';
+                                $hash = hash('sha256', $_POST['password']."greensalt");
+                                $values = "WHERE email='".$_POST['email']."' and password='".$hash."'";
+                                $rez = countResults("SELECT COUNT(*) FROM users ".$values);
+                                if($rez == 1){
+                                    $data = getUserData("SELECT * FROM users ".$values);
+                                    #$data = getUserData("SELECT * FROM users ".$values);
+                                    if($data['active'] == "1"){
+                                        $_SESSION['logged_in'] = true;
+                                        $_SESSION['user_id'] = $data['id'];
+                                        $_SESSION['first_name'] = $data['first_name'];
+                                        $_SESSION['last_name'] = $data['last_name'];
+                                        $_SESSION['role_id'] = $data['role_id'];
+                                        $_SESSION['email'] = $data['email'];
+                                        if($data['role_id'] == 3){
+                                            $_SESSION['street'] = $data['street_address'];
+                                            $_SESSION['city'] = $data['city'];
+                                            $_SESSION['postal'] = $data['postal_code'];
+                                            $_SESSION['country'] = $data['country'];
+                                            $_SESSION['phone'] = $data['phone_number'];
+                                        }
+                                        session_regenerate_id();
+                                        header('Location: index');
+                                        # deactivated user
+                                    } elseif ($data['active'] == "0") {
+                                        echo "<h2>Deactivated user:<br/> ".$data['email']."!</h2>";
+                                    }
+                                } else {
+                                    echo "<h2>Wrong email or password!</h2>";
+                                }
+                            }
                             ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <?php include 'templates/template_footer.php'; ?>
     </body>
 </html>
