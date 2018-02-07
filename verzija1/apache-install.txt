@@ -1,0 +1,62 @@
+# install SVN
+sudo apt-get install subversion
+# make dir ssl
+sudo mkdir /etc/apache2/ssl
+# clone certs
+svn checkout https://ep@student-lem.fri.uni-lj.si/svn/primeri/certs
+# copy certs to ssl
+sudo cp /home/ep/NetBeansProjects/Online-shop/certs/*.pem /etc/apache2/ssl
+# root access
+sudo chmod go-rwx /etc/apache2/ssl/*.pem
+# enable module ssl
+sudo a2enmod ssl
+service apache2 restart
+# set certs
+sudo vim /etc/apache2/sites-available/default-ssl.conf
+# change
+SSLCertificateFile    /etc/apache2/ssl/localhost-cert.pem
+SSLCertificateKeyFile  /etc/apache2/ssl/localhost-key.pem
+# add
+Alias /netbeans /home/ep/NetBeansProjects
+<Directory /home/ep/NetBeansProjects>
+    Require all granted
+</Directory>
+# enable
+sudo a2ensite default-ssl.conf
+service apache2 reload
+#
+sudo mkdir /var/www/html/zavarovano
+sudo vim /var/www/html/zavarovano/index.html
+# must be in
+<!DOCTYPE html>
+
+<meta charset="UTF-8">
+<title>Zavarovana spletna stran</title>
+</head>
+
+<p>Ta stran bo dosegljiva le po protokolu HTTPS.</p>
+
+
+sudo vim /etc/apache2/sites-available/000-default.conf
+# must be in
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    Alias /netbeans /home/ep/NetBeansProjects
+    <Directory /home/ep/NetBeansProjects>
+        Require all granted
+    </Directory>
+
+    # Spodnje tri vrstice preprecujejo dostop do omenjene mape
+    <Directory /var/www/html/zavarovano>
+        Require all denied
+    </Directory>
+</VirtualHost>
+# restart
+sudo service apache2 reload
+# save all file to zavarovano
+sudo cp /home/ep/NetBeansProjects/Online-shop/verzija1/* /var/www/html/zavarovano/
