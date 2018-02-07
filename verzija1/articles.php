@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(isset($_POST['radio'])){
             echo $_POST['radio'];
             $values = "(".$_POST['article_id'].",".$_SESSION['user_id'].",".$_POST['radio'].")";
-            executeQuery("INSERT INTO articles_rating VALUES ".$values);
+            executeQuery("INSERT INTO articles_rating (article_id, user_id, rating) VALUES ".$values);
         }
     }
     
@@ -76,7 +76,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <?php 
                             if($row['image_type'] == "image/jpeg"){
                             echo '<br/><img src="data:image/jpeg;base64,'.base64_encode($row['image']).'" style="width: 100px; height: 100px;"/>';
-                            }else if($row['image_type'] == "image/jpeg"){
+                            }else if($row['image_type'] == "image/png"){
                                 echo '<br/><img src="data:image/png;base64,'.base64_encode($row['image']).'" style="width: 100px; height: 100px;"/>';
                             }else{
                                 
@@ -118,7 +118,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <?php 
                             if($row['image_type'] == "image/jpeg"){
                             echo '<br/><img src="data:image/jpeg;base64,'.base64_encode($row['image']).'" style="width: 100px; height: 100px;"/>';
-                            }else if($row['image_type'] == "image/jpeg"){
+                            }else if($row['image_type'] == "image/png"){
                                 echo '<br/><img src="data:image/png;base64,'.base64_encode($row['image']).'" style="width: 100px; height: 100px;"/>';
                             }else{
                                 

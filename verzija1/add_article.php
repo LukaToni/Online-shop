@@ -21,8 +21,6 @@ if(isset($_POST['submitted']) && isset($_FILES['image'])){
             . "VALUES ".$values);
     }else{
         $type = $_FILES['image']['type'];
-        echo $type;
-        exit();
         $values = "(NULL,'".htmlspecialchars($_POST['name'])."',".$_POST['price'].",'".htmlspecialchars($_POST['desc'])."','$image', '$type' ,NULL)";
     $rez = executeQuery("INSERT INTO articles (id, name, price, description, image, image_type,active) "
             . "VALUES ".$values);

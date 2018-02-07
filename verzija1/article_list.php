@@ -77,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             if($row['image_type'] == "image/jpeg"){
                             echo '<img src="data:image/jpeg;base64,'.base64_encode($row['image']).'" name="img" style="width: 100px; height: 100px;"/>';
                             }else if($row['image_type'] == "image/png"){
-                                echo '<img src="data:image/png;base64,'.base64_encode($row['image']).' name="img" style="width: 100px; height: 100px;"/>';
+                                echo '<img src="data:image/png;base64,'.base64_encode($row['image']).'" name="img" style="width: 100px; height: 100px;"/>';
                             }else{
                                 echo "<input type=\"file\" name=\"image\" class = \"box\" value=\"Add image\">";
                             }

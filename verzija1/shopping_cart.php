@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         foreach ($rez as $row) {
             $values = "('".$orderID."',".$_SESSION['user_id'].",".$row['article_id'].",".$row['quantity'].", 'pending')";
-            executeQuery("INSERT INTO orders VALUES ".$values);
+            executeQuery("INSERT INTO orders (order_id, user_id, article_id, quantity, state) VALUES ".$values);
         }
 
     }else if(isset($_POST['end_shopping'])){
@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         foreach ($rez as $row) {
             $values = "('".$orderID."',".$_SESSION['user_id'].",".$row['article_id'].",".$row['quantity'].", 'pending')";
-            executeQuery("INSERT INTO orders VALUES ".$values);
+            executeQuery("INSERT INTO orders (order_id, user_id, article_id, quantity, state) VALUES ".$values);
         }
     }else if(isset($_POST['clearcart'])){
         executeQuery("DELETE FROM shopping_cart WHERE user_id = ".$_SESSION['user_id']);
