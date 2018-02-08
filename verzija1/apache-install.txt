@@ -59,4 +59,4 @@ sudo vim /etc/apache2/sites-available/000-default.conf
 # restart
 sudo service apache2 reload
 # save all file to zavarovano
-sudo cp /home/ep/NetBeansProjects/Online-shop/verzija1/* /var/www/html/zavarovano/
+sudo scp -r /home/ep/NetBeansProjects/Online-shop/verzija1/* /var/www/html/zavarovano/
