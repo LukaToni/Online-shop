@@ -1,8 +1,6 @@
 <?php
+include 'https.php';
 session_start();
-if(isset($_SESSION['logged_in'])){
-    include 'https.php';
-}
 
 
 include 'database/DB_Engine.php';

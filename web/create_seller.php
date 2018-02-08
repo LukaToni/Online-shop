@@ -2,7 +2,7 @@
 include 'https.php';
 session_start();
 if(!isset($_SESSION['logged_in']) || $_SESSION['role_id'] != 1){
-    header('Location: index');
+    header('Location: index.php');
 }
 unset($_SESSION['register_success']);
 
