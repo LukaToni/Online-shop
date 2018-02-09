@@ -54,7 +54,7 @@ if(isset($_SESSION['logged_in'])){
                                             $_SESSION['phone'] = $data['phone_number'];
                                         }
                                         session_regenerate_id();
-                                        header('Location: index');
+                                        header('Location: index.php');
                                         # deactivated user
                                     } elseif ($data['active'] == "0") {
                                         echo "<h2>Deactivated user:<br/> ".$data['email']."!</h2>";
