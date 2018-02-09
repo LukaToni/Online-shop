@@ -161,10 +161,11 @@ abstract class AbstractDB {
     public static abstract function get(array $id);
 
     public static abstract function getAll();
-
+    
     public static abstract function insert(array $params);
 
     public static abstract function update(array $params);
-
+    
     public static abstract function delete(array $id);
+
 }

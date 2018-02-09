@@ -2,20 +2,15 @@
 
 <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
 <meta charset="UTF-8" />
-<title>Library</title>
+<title>All items</title>
 
-<h1>All items</h1>
-
-<p>[
-<a href="<?= BASE_URL . "items" ?>">All items</a> |
-<a href="<?= BASE_URL . "items/add" ?>">Add new</a>
-]</p>
+<p>[ <a href="<?= BASE_URL . "articles" ?>">All items</a> ]</p>
 
 <ul>
 
-    <?php foreach ($items as $item): ?>
-        <li><a href="<?= BASE_URL . "items/" . $item["id"] ?>"> 
-        	<?= $item["title"] ?> </a></li>
+    <?php foreach ($articles as $art): ?>
+        <li><a href="<?= BASE_URL . "articles/" . $art["id"] ?>"> 
+        	<?= $art["name"] ?> </a></li>
     <?php endforeach; ?>
 
 </ul>

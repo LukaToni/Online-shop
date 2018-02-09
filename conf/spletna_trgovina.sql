@@ -1,7 +1,3 @@
-drop database if exists trgovina; 
-create database trgovina;
-use trgovina;
-
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: spletna_trgovina
@@ -44,10 +40,7 @@ CREATE TABLE `articles` (
 
 LOCK TABLES `articles` WRITE;
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
-INSERT INTO `articles` VALUES 
-(1,'Trousers',10,'Blue trousers for adults',NULL,NULL,1),
-(2,'Shirt',20,'Red shirt for seniors',NULL,NULL,1),
-(3,'Socks',7,'Blue socks for grandmas',NULL,NULL,1);
+INSERT INTO `articles` VALUES (1,'Trousers',10,'Blue trousers for adults',NULL,NULL,1),(2,'Shirt',20,'Red shirt for seniors',NULL,NULL,1);
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 UNLOCK TABLES;
 

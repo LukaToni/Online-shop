@@ -4,18 +4,14 @@
 <meta charset="UTF-8" />
 <title>Item detail</title>
 
-<h1>Details of: <?= $title ?></h1>
+<h1>Details of: <?= $name ?></h1>
 
-<p>[
-    <a href="<?= BASE_URL . "items" ?>">All items</a> |
-    <a href="<?= BASE_URL . "items/add" ?>">Add new</a>
-    ]</p>
+<p>[<a href="<?= BASE_URL . "articles" ?>">All items</a>]</p>
 
 <ul>
-    <li>Title: <b><?= $title ?></b></li>
+    <li>Title: <b><?= $name ?></b></li>
     <li>Price: <b><?= $price ?> EUR</b></li>
     <li>Description: <i><?= $description ?></i></li>
 </ul>
 
-<p>[ <a href="<?= BASE_URL . "items/edit/" . $id ?>">Edit</a> |
-    <a href="<?= BASE_URL . "items" ?>">Item index</a> ]</p>
+

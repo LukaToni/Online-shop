@@ -11,29 +11,29 @@ class ItemsController {
 
     public static function index() {
         echo ViewHelper::render("view/item-list.php", [
-            "items" => ItemDB::getAll()
+            "articles" => ItemDB::getAll()
         ]);
     }
-
+    
     public static function addForm($values = [
-        "title" => "",
+        "name" => "",
         "price" => "",
         "description" => ""
     ]) {
         echo ViewHelper::render("view/item-add.php", $values);
     }
-
+    
     public static function add() {
         $data = filter_input_array(INPUT_POST, self::getRules());
 
         if (self::checkValues($data)) {
             $id = ItemDB::insert($data);
-            echo ViewHelper::redirect(BASE_URL . "items/" . $id);
+            echo ViewHelper::redirect(BASE_URL . "articles/" . $id);
         } else {
             self::addForm($data);
         }
     }
-
+    
     public static function editForm($params) {
         if (is_array($params)) {
             $values = $params;
@@ -52,7 +52,7 @@ class ItemsController {
         if (self::checkValues($data)) {
             $data["id"] = $id;
             ItemDB::update($data);
-            ViewHelper::redirect(BASE_URL . "items/" . $data["id"]);
+            ViewHelper::redirect(BASE_URL . "articles/" . $data["id"]);
         } else {
             self::editForm($data);
         }
@@ -64,15 +64,14 @@ class ItemsController {
         ]);
 
         if (self::checkValues($data)) {
-            ItemDB::delete(["id" => $id]);
-            $url = BASE_URL . "items";
+            BookDB::delete(["id" => $id]);
+            $url = BASE_URL . "books";
         } else {
-            $url = BASE_URL . "items/edit/" . $id;
+            $url = BASE_URL . "books/edit/" . $id;
         }
 
         ViewHelper::redirect($url);
     }
-
     /**
      * Returns TRUE if given $input array contains no FALSE values
      * @param type $input
@@ -90,16 +89,16 @@ class ItemsController {
 
         return $result;
     }
-
+    
     /**
      * Returns an array of filtering rules for manipulation items
      * @return type
      */
     public static function getRules() {
         return [
-            'title' => FILTER_SANITIZE_SPECIAL_CHARS,
-            'description' => FILTER_SANITIZE_SPECIAL_CHARS,
+            'name' => FILTER_SANITIZE_SPECIAL_CHARS,
             'price' => FILTER_VALIDATE_FLOAT,
+            'description' => FILTER_SANITIZE_SPECIAL_CHARS,
         ];
     }
 

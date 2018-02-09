@@ -13,43 +13,31 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
-    "/^items\/?(\d+)?$/" => function ($method, $id = null) {
+    "/^articles\/?(\d+)?$/" => function ($method, $id = null) {
         if ($id == null) {
             ItemsController::index();
         } else {
             ItemsController::get($id);
         }
     },
-    "/^items\/add$/" => function ($method) {
+    "/^articles\/add$/" => function ($method) {
         if ($method == "POST") {
             ItemsController::add();
         } else {
             ItemsController::addForm();
         }
     },
-    "/^items\/edit\/(\d+)$/" => function ($method, $id) {
-        if ($method == "POST") {
-            ItemsController::edit($id);
-        } else {
-            ItemsController::editForm($id);
-        }
-    },
-    "/^items\/delete\/(\d+)$/" => function ($method, $id) {
-        if ($method == "POST") {
-            ItemsController::delete($id);
-        }
-    },
-    "/^items\/(\d+)\/(foo|bar|baz)\/(\d+)$/" => function ($method, $id, $val, $num) {
+    "/^articles\/(\d+)\/(foo|bar|baz)\/(\d+)$/" => function ($method, $id, $val, $num) {
         // primer kako definirati funkcijo, ki vzame dodatne parametre
         // http://localhost/netbeans/mvc-rest/books/1/foo/10
         echo "$id, $val, $num";
     },
     "/^$/" => function () {
-        ViewHelper::redirect(BASE_URL . "items");
+        ViewHelper::redirect(BASE_URL . "articles");
     },
     # REST API
-    "/^api\/items\/(\d+)$/" => function ($method, $id = null) {
-        // TODO: izbris knjige z uporabo HTTP metode DELETE
+            
+    "/^api\/articles\/(\d+)$/" => function ($method, $id = null) {
         switch ($method) {
             case "PUT":
                 ItemsRESTController::edit($id);
@@ -59,7 +47,7 @@ $urls = [
                 break;
         }
     },
-    "/^api\/items$/" => function ($method, $id = null) {
+    "/^api\/articles$/" => function ($method, $id = null) {
         switch ($method) {
             case "POST":
                 ItemsRESTController::add();
